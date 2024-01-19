@@ -42,5 +42,14 @@
 <body>
     <h1>Admin</h1>
     <a href="/thirteaann-pos/config/logout.php">Logout</a>
+
+    <ol>
+        <a href="hrm.php">Staff</a>
+        <a href="inventory.php">Products<a>
+        <a href="order-records.php">Order Records</a>
+        <a href="orders.php">Orders</a>
+        <a href="report.php">Records</a>
+    </ol>
+
 </body>
 </html>
