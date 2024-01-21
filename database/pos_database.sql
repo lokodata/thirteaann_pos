@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2024 at 03:06 PM
+-- Generation Time: Jan 21, 2024 at 03:30 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,10 +47,10 @@ CREATE TABLE `order_table` (
 
 CREATE TABLE `product_table` (
   `product_id` int(11) NOT NULL,
-  `product_image` varchar(255) DEFAULT NULL,
+  `product_image` mediumblob DEFAULT NULL,
   `product_name` varchar(100) NOT NULL,
   `size` varchar(50) DEFAULT NULL,
-  `unit_price` decimal(10,2) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `category` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -58,7 +58,7 @@ CREATE TABLE `product_table` (
 -- Dumping data for table `product_table`
 --
 
-INSERT INTO `product_table` (`product_id`, `product_image`, `product_name`, `size`, `unit_price`, `category`) VALUES
+INSERT INTO `product_table` (`product_id`, `product_image`, `product_name`, `size`, `price`, `category`) VALUES
 (1, NULL, 'Blueberry Cheesecake', '500 ml', 49.00, 'Cheesecake & Cloud Series'),
 (2, NULL, 'Cheesecake', '500 ml', 39.00, 'Cheesecake & Cloud Series'),
 (3, NULL, 'Mango Cheesecake', '500 ml', 49.00, 'Cheesecake & Cloud Series'),
@@ -181,7 +181,7 @@ INSERT INTO `product_table` (`product_id`, `product_image`, `product_name`, `siz
 (120, NULL, 'Lemon Yogurt', '500 ml', 49.00, 'Yogurt Series'),
 (121, NULL, 'Lychee Yogurt', '500 ml', 49.00, 'Yogurt Series'),
 (122, NULL, 'Passion Fruit Yogurt', '500 ml', 49.00, 'Yogurt Series'),
-(123, NULL, 'Strawberry Yogurt', '500 ml', 49.00, 'Yogurt Series');
+(146, NULL, 'asdsad', '500 ml', 123.00, 'Traditional Flavors');
 
 -- --------------------------------------------------------
 
@@ -195,7 +195,7 @@ CREATE TABLE `staff_table` (
   `password` varchar(255) NOT NULL,
   `role` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `contact_number` varchar(15) NOT NULL
+  `contact_number` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -203,8 +203,9 @@ CREATE TABLE `staff_table` (
 --
 
 INSERT INTO `staff_table` (`user_id`, `email`, `password`, `role`, `name`, `contact_number`) VALUES
-(1, 'admin@example.com', 'admin_password', 'Admin', 'Admin Name', '123-456-7890'),
-(2, 'staff@example.com', 'staff_password', 'Staff', 'Staff Name', '987-654-3210');
+(1, 'admin@example.com', '$2y$10$W9ogqXnEVAILYXiirZzfVu.KKS/fVOhh/SKwyGN1WyFbYePiiCRAm', 'Admin', 'Admin Name', '123-456-7890'),
+(2, 'staff@example.com', '$2y$10$1OaWAJ5x5Hz/0rUqhrJa/OLhKoxhytKxXyBIUuC.fe48MIy6VLfPK', 'Staff', 'Staff Name', '987-654-3210'),
+(12, 'sadasd@email.com', '$2y$10$2nb3nTYl7SkjTn2jB98apO8cuKP.yVEMQHGvJKzB2gsecfsDRhJcm', 'Staff', 'est', '213988123');
 
 --
 -- Indexes for dumped tables
@@ -243,13 +244,13 @@ ALTER TABLE `order_table`
 -- AUTO_INCREMENT for table `product_table`
 --
 ALTER TABLE `product_table`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `staff_table`
 --
 ALTER TABLE `staff_table`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

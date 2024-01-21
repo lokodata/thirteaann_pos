@@ -203,12 +203,10 @@
 
             var formData = new FormData(this);
             formData.append("save_staff", true);
-
-            console.log(formData);
             
             $.ajax({
                 type: "POST",
-                url: "../config/ajax-function.php",
+                url: "../config/hrm-function.php",
                 data: formData,        
                 processData: false,
                 contentType: false,
@@ -238,7 +236,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "../config/ajax-function.php",
+                url: "../config/hrm-function.php",
                 data: { user_id: userId },
                 success: function (response) {
                     var res = JSON.parse(response);
@@ -275,7 +273,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "../config/ajax-function.php",
+                url: "../config/hrm-function.php",
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -310,7 +308,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "../config/ajax-function.php",
+                    url: "../config/hrm-function.php",
                     data: {
                         'delete_staff': true,
                         'user_id': userId,
