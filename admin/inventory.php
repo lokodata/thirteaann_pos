@@ -189,7 +189,7 @@
 
                 $stmt = $mysqli->prepare("SELECT * FROM product_table");
                 $stmt->execute();
-                $stmt->bind_result($product_id, $product_image, $product_name, $size, $unit_price, $category);
+                $stmt->bind_result($product_id, $product_image, $product_name, $size, $price, $category);
 
                 while ($stmt->fetch()) {
                     echo "<tr>";    
@@ -197,7 +197,7 @@
     
                     echo "<td>$product_name</td>";
                     echo "<td>$size</td>";
-                    echo "<td>$unit_price</td>";
+                    echo "<td>$price</td>";
                     echo "<td>$category</td>";
                     echo "<td>
                             <button class='btn btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#productEditModal' data-product-id='$product_id'> Edit </button>

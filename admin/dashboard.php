@@ -48,7 +48,7 @@
         <a href="inventory.php">Products<a>
         <a href="order-records.php">Order Records</a>
         <a href="orders.php">Orders</a>
-        <a href="report.php">Records</a>
+        <a href="report.php">Report</a>
     </ol>
 
 </body>

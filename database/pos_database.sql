@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2024 at 03:30 PM
+-- Generation Time: Jan 23, 2024 at 04:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,20 +24,57 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `order_item_id` int(11) NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `size` varchar(50) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `product_name`, `size`, `price`, `quantity`, `total_price`) VALUES
+(1, 5, 3, 'Mango Cheesecake', '500 ml', 49.00, 1, 49.00),
+(2, 5, 19, 'Berry Cafe', 'Regular', 49.00, 1, 49.00),
+(3, 5, 19, 'Berry Cafe', 'Regular', 49.00, 1, 49.00),
+(4, 6, 112, 'Green Apple Yogurt', '500 ml', 39.00, 1, 39.00),
+(5, 6, 115, 'Passion Fruit Yogurt', '500 ml', 39.00, 1, 39.00),
+(6, 6, 111, 'Blueberry Yogurt', '500 ml', 49.00, 1, 49.00),
+(7, 6, 111, 'Blueberry Yogurt', '500 ml', 49.00, 1, 49.00);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `order_table`
 --
 
 CREATE TABLE `order_table` (
   `order_id` int(11) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `product_name` varchar(100) NOT NULL,
-  `size` varchar(50) DEFAULT NULL,
-  `unit_price` decimal(10,2) NOT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `total_price` decimal(10,2) NOT NULL,
   `date` date DEFAULT NULL,
-  `receipt_number` varchar(20) DEFAULT NULL
+  `receipt_id` varchar(11) DEFAULT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `payment_received` decimal(10,2) DEFAULT NULL,
+  `exact_change` decimal(10,2) DEFAULT NULL,
+  `payment_method` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_table`
+--
+
+INSERT INTO `order_table` (`order_id`, `date`, `receipt_id`, `total_price`, `payment_received`, `exact_change`, `payment_method`) VALUES
+(4, '2024-01-23', 'REC1', 147.00, 500.00, 353.00, 'Cash'),
+(5, '2024-01-23', 'REC2', 147.00, 500.00, 353.00, 'Cash'),
+(6, '2024-01-23', 'REC3', 176.00, 500.00, 324.00, 'Cash');
 
 -- --------------------------------------------------------
 
@@ -180,8 +217,7 @@ INSERT INTO `product_table` (`product_id`, `product_image`, `product_name`, `siz
 (119, NULL, 'Green Apple Yogurt', '500 ml', 49.00, 'Yogurt Series'),
 (120, NULL, 'Lemon Yogurt', '500 ml', 49.00, 'Yogurt Series'),
 (121, NULL, 'Lychee Yogurt', '500 ml', 49.00, 'Yogurt Series'),
-(122, NULL, 'Passion Fruit Yogurt', '500 ml', 49.00, 'Yogurt Series'),
-(146, NULL, 'asdsad', '500 ml', 123.00, 'Traditional Flavors');
+(122, NULL, 'Passion Fruit Yogurt', '500 ml', 49.00, 'Yogurt Series');
 
 -- --------------------------------------------------------
 
@@ -212,11 +248,19 @@ INSERT INTO `staff_table` (`user_id`, `email`, `password`, `role`, `name`, `cont
 --
 
 --
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`order_item_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `order_table`
 --
 ALTER TABLE `order_table`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD UNIQUE KEY `receipt_id` (`receipt_id`);
 
 --
 -- Indexes for table `product_table`
@@ -235,10 +279,16 @@ ALTER TABLE `staff_table`
 --
 
 --
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product_table`
@@ -257,10 +307,11 @@ ALTER TABLE `staff_table`
 --
 
 --
--- Constraints for table `order_table`
+-- Constraints for table `order_items`
 --
-ALTER TABLE `order_table`
-  ADD CONSTRAINT `order_table_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_table` (`product_id`);
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_table` (`order_id`),
+  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_table` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

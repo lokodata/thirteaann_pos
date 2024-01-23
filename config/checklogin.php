@@ -1,5 +1,5 @@
 <?php
-// Function to generate a secure token
+// Function to generate a secure token for remember me
 function generateToken() {
     // Generate a random string using random_bytes
     $randomBytes = random_bytes(32);
@@ -17,6 +17,7 @@ session_start();
 
 include 'config.php';
 
+// login fucntion
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
