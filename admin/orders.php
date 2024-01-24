@@ -10,20 +10,26 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="../styles/orders.css">
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
 <body>
-    <!-- Add Product Modal -->
+    <!-- Receipt Modal -->
     <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Order Receipt</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body" id="modalBodyContent">
+                    <h4 class="mb-0 text-center">ThirTeaAnn</h4>
+                    <p class="text-center">Timalan Balsahan<br> Naic, Cavite</p>
+                    <p id="currentDate"></p>
+                    <div id="order_information">
+                        <!-- Order information will be displayed here -->
+                    </div>
                 </div>
 
-                <div id="order_information" class="modal-body">
-                    
+                <!-- button to print the modal-body exactly as what it looks like the size and information -->
+                <div class="modal-footer p-1 m-auto">
+                    <button type="button" class="btn btn-primary" onclick="printModalBody()">Print</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -146,6 +152,7 @@
                     </tfoot>
                 </table>
             </form>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -153,6 +160,20 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
+
+        function printModalBody() {
+            try {
+                // Show the modal content
+                const modalBody = document.getElementById('modalBodyContent');
+                modalBody.style.display = 'block';
+
+                // Print the modal content
+                window.print();
+
+            } catch (error) {
+                console.error("Error during printModalBody:", error);
+            }
+        }
 
         function filterByCategory(selectedCategory) {
             var rows = $('#product_table tbody tr');
@@ -288,21 +309,26 @@
         }
 
         function displayOrderInformation(formData) {
-            var orderInformationHtml = '<h2>Order Information</h2>';
-            
-            // Display products
-            orderInformationHtml += '<h3>Products:</h3>';
-            orderInformationHtml += '<ul>';
+            var orderInformationHtml = '<div class="asterisk-line"></div>';
             formData.products.forEach(function(product) {
-                orderInformationHtml += `<li>${product.quantity} x ${product.productName} (${product.size}): $${product.total.toFixed(2)}</li>`;
+                orderInformationHtml += `<p class="mb-0">${product.quantity} x ${product.productName} (${product.size}): $${product.total.toFixed(2)}</p>`;
             });
-            orderInformationHtml += '</ul>';
+
+            orderInformationHtml += '<div class="asterisk-line"></div>';
 
             // Display other form data
-            orderInformationHtml += `<p>Total Price: $${formData.totalPrice.toFixed(2)}</p>`;
-            orderInformationHtml += `<p>Payment Received: $${formData.paymentReceived.toFixed(2)}</p>`;
-            orderInformationHtml += `<p>Exact Change: $${formData.exactChange.toFixed(2)}</p>`;
+            orderInformationHtml += `<p class="mb-0 mt-3">Total: $${formData.totalPrice.toFixed(2)}</p>`;
+            orderInformationHtml += `<p class="mb-0">Payment: $${formData.paymentReceived.toFixed(2)}</p>`;
+            orderInformationHtml += `<p class="mb-0">Change: $${formData.exactChange.toFixed(2)}</p>`;
             orderInformationHtml += `<p>Payment Method: ${formData.paymentMethod}</p>`;
+
+            orderInformationHtml += '<div class="asterisk-line"></div>';
+
+            // Dynamically set the current date and time
+            var currentDateElement = document.getElementById('currentDate');
+            var currentDate = new Date();
+            var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+            currentDateElement.textContent = currentDate.toLocaleString('en-US', options);
 
             // Append to the modal body
             $('#order_information').html(orderInformationHtml);
