@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['productId'])) {
     echo "</td>";
 
     echo "<td>";
-    echo "<button type='button' class='btn btn-sm btn-success' onclick='incrementQuantity(this)'>+</button>";
+    echo "<button type='button' class='btn btn-sm btn-success increment-btn' onclick='incrementQuantity(this)'>+</button>";
     echo "<button type='button' class='btn btn-sm btn-danger' onclick='decrementQuantity(this)'>-</button>";
     echo "<button type='button' class='btn btn-sm btn-warning' onclick='removeItem(this)'>Remove</button>";
     echo "</td>";

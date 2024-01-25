@@ -94,6 +94,8 @@
         <div class="order" id="order_details">
             <h1>Order</h1>
 
+            <div id="errorMessageSave" class="alert alert-warning d-none"></div>
+
             <form id="order_form">
                 <table class="table" id="order_table">
                     <thead>
@@ -144,8 +146,11 @@
 
                         <tr>
                             <td>
-                                <button type="button" class="btn btn-primary" id='saveOrderBtn' data-bs-toggle='modal' data-bs-target='#receiptModal'>
+                                <button type="button" class="btn btn-primary" id='saveOrderBtn'>
                                     Save Order
+                                </button>
+                                <button type="button" class="btn btn-danger" id='clearOrderBtn'>
+                                    Clear
                                 </button>
                             </td>
                         </tr>
@@ -161,6 +166,29 @@
 
     <script>
 
+        // Function to clear the order and reset form values
+        function clearOrder() {
+            // Remove all rows from the order table
+            $('#order_table tbody tr').remove();
+
+            // Reset total price, payment received, and exact change
+            $('#total_price').text('0.00');
+            $('#payment_received input').val('');
+            $('#change').text('0.00');
+
+            // Uncheck payment method radio buttons
+            $('input[name="payment_method"]').prop('checked', false);
+
+            // Update the display
+            updateExactChange();
+        }
+
+        // Attach the clearOrder function to the click event of the clear order button
+        $('#clearOrderBtn').click(function() {
+            clearOrder();
+        });
+
+
         function printModalBody() {
             try {
                 // Show the modal content
@@ -171,7 +199,8 @@
                 window.print();
 
             } catch (error) {
-                console.error("Error during printModalBody:", error);
+                alertify.set('notifier','position', 'top-right');
+                alertify.error("Error during printModalBody: " + error);
             }
         }
 
@@ -197,24 +226,32 @@
             $('#product_table tbody tr').click(function() {
                 var productId = $(this).data('product-id');
 
-                // Use AJAX to fetch product details
-                $.ajax({
-                    url: '../config/orders-function.php',
-                    method: 'POST',
-                    data: { productId: productId },
-                    success: function(response) {
-                        // Append the new row for the selected product
-                        $('#order_table tbody').append(response);
-                        
-                        updateTotalPrice(); // Trigger updateTotalPrice after appending the row
-                        updateExactChange();
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
+                // Check if the product is already in the order table
+                var existingRow = $('#order_table tbody tr[data-product-id="' + productId + '"]');
+                if (existingRow.length > 0) {
+                    // If the product already exists, trigger incrementQuantity
+                    incrementQuantity(existingRow.find('.increment-btn'));
+                } else {
+                    // If the product is not in the table yet, use AJAX to fetch product details
+                    $.ajax({
+                        url: '../config/orders-function.php',
+                        method: 'POST',
+                        data: { productId: productId },
+                        success: function(response) {
+                            // Append the new row for the selected product
+                            $('#order_table tbody').append(response);
+                            
+                            updateTotalPrice(); // Trigger updateTotalPrice after appending the row
+                            updateExactChange();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                }
             });
         });
+
 
         window.incrementQuantity = function(button) {
             var inputElement = $(button).parent().prev().find('input[name="quantity"]');
@@ -225,7 +262,7 @@
             updatePrices(inputElement.closest('tr').find('select[name="size"]')[0]);
             updateTotalPrice();
             updateExactChange();
-        }
+        }   
 
         window.decrementQuantity = function(button) {
             var inputElement = $(button).parent().prev().find('input[name="quantity"]');
@@ -251,25 +288,29 @@
         $(document).on('click', '#saveOrderBtn', function() {
             updateTotalPrice();
             updateExactChange();
-            var formData = gatherFormData(); // Capture the returned formData
-            displayOrderInformation(formData);
+            var formData = gatherFormData(); 
             saveOrder(formData);
         });
 
         function saveOrder(formData) {
-
             // Make an AJAX request to save-order.php
             $.ajax({
                 type: 'POST',
                 url: '../config/save-order.php',
                 data: { orderData: JSON.stringify(formData) }, // Sending the order data as JSON string
+                dataType: 'json', // Expect JSON response
                 success: function (response) {
-                    // Handle the success response if needed
-                    console.log('Order saved successfully:', response);
-                },
-                error: function (xhr, status, error) {
-                    // Handle errors if any
-                    console.error('Error saving order:', status, error);
+                    // Check the response from the server to determine success or error
+                    alertify.set('notifier','position', 'top-right');
+
+                    if (response.success) {
+                        alertify.success(response.success);
+                        $('#saveOrderBtn').attr('data-bs-target', '#receiptModal');
+                        displayOrderInformation(formData);
+                        clearOrder();
+                    } else {
+                        alertify.error('Error saving order: ' + response.error);
+                    }
                 }
             });
         }
@@ -288,7 +329,7 @@
 
                 var price = parseFloat($(this).find('td:nth-child(3)').text().trim());
                 var quantity = parseInt($(this).find('input[name="quantity"]').val());
-                var total = price * quantity;
+                var total = price;
 
                 formData.products.push({
                     productName: productName,
@@ -327,7 +368,7 @@
             // Dynamically set the current date and time
             var currentDateElement = document.getElementById('currentDate');
             var currentDate = new Date();
-            var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+            var options = { year: 'numeric', month: 'numeric', day: 'numeric'};
             currentDateElement.textContent = currentDate.toLocaleString('en-US', options);
 
             // Append to the modal body
