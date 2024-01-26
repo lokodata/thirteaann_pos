@@ -1,3 +1,7 @@
+<?php
+    require "../config/admin-authentication.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,0 +1,7 @@
+.SalesByDate,
+.SalesByCategory,
+.Top10ProductsByQuantity,
+.Top10ProductsBySales {
+  width: 500px;
+  height: 500px;
+}
