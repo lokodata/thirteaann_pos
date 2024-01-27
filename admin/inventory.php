@@ -138,49 +138,53 @@
         </div>
     </div>
 
-    <h1>Inventory Management</h1>
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productAddModal">Add New Product</button>
-
-    <table class="table" id="product_table">
-        <thead>
-            <tr>
-                <th>Product Image</th>
-                <th>Product Name</th>
-                <th>Size</th>
-                <th>Unit Price</th>
-                <th>Category</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                require '../config/config.php';
-
-                $stmt = $mysqli->prepare("SELECT * FROM product_table");
-                $stmt->execute();
-                $stmt->bind_result($product_id, $product_image, $product_name, $size, $price, $category);
-
-                while ($stmt->fetch()) {
-                    echo "<tr>";    
-                    echo "<td><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
+    <?php require "../config/admin-sidebar.php"; ?>
     
-                    echo "<td>$product_name</td>";
-                    echo "<td>$size</td>";
-                    echo "<td>$price</td>";
-                    echo "<td>$category</td>";
-                    echo "<td>
-                            <button class='btn btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#productEditModal' data-product-id='$product_id'> Edit </button>
+    <div class="main-content">
+        <h1>Inventory Management</h1>
 
-                            <button class='btn btn-danger delete-btn' data-product-id='$product_id'> Delete </button>
-                        </td>";
-                    echo "</tr>";
-                }
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productAddModal">Add New Product</button>
 
-                $stmt->close();
-            ?>
-        </tbody>
-    </table>
+        <table class="table" id="product_table">
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Size</th>
+                    <th>Unit Price</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    require '../config/config.php';
+
+                    $stmt = $mysqli->prepare("SELECT * FROM product_table");
+                    $stmt->execute();
+                    $stmt->bind_result($product_id, $product_image, $product_name, $size, $price, $category);
+
+                    while ($stmt->fetch()) {
+                        echo "<tr>";    
+                        echo "<td><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
+
+                        echo "<td>$product_name</td>";
+                        echo "<td>$size</td>";
+                        echo "<td>$price</td>";
+                        echo "<td>$category</td>";
+                        echo "<td>
+                                <button class='btn btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#productEditModal' data-product-id='$product_id'> Edit </button>
+
+                                <button class='btn btn-danger delete-btn' data-product-id='$product_id'> Delete </button>
+                            </td>";
+                        echo "</tr>";
+                    }
+
+                    $stmt->close();
+                ?>
+            </tbody>
+        </table>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -38,6 +38,8 @@
         </div>
     </div>
 
+    <?php require "../config/admin-sidebar.php"; ?>
+    
     <div class="container">
         <div class="inventory">
             <h1>Products</h1>

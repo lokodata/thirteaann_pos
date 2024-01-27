@@ -18,10 +18,10 @@
             $stmt->close();
 
             if ($role == 'Admin') {
-                header("location: /thirteaann-pos/admin/dashboard.php");
+                header("location: ./admin/dashboard.php");
                 exit();
             } elseif ($role == 'Staff') {
-                header("location: /thirteaann-pos/staff/dashboard.php");
+                header("location: ./staff/dashboard.php");
                 exit();
             }
         } else {
@@ -39,23 +39,37 @@
     <title>ThirTeaAnn's POS</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/index.css">
+
 </head>
 <body>
-    <form action="config/checklogin.php" method="POST">
-        <img src="./assets/thirteaann-logo.svg" alt="ThirTeaAnn">
+    <div class="container-fluid container">
+        <h1>Login to your Account</h1>
+        <p>Enter to continue and explore within your grasp</p>
 
-        <label for="email">Email: <input id="email" type="text" name="email" required /> </label> 
+        <form action="config/checklogin.php" method="POST" class="form">
+            <label for="email" class="email">
+                <img src="./assets/index_assets/user-vector.svg" alt="Email">
+                <input id="email" type="text" name="email" placeholder="Enter email address" required /> 
+            </label> 
 
-        <label for="password">Password: <input id="password" type="password" name="password" required /> </label>
+            <label for="password" class="password">
+                <img src="./assets/index_assets/lock-vector.svg" alt="Password">
+                <input id="password" type="password" name="password" placeholder="Password" required /> 
+            </label>
 
-        <label for="remember_me">Remember Me: <input id="remember_me" type="checkbox" name="remember_me" /> </label>
+            <div class="remember_me">
+                <input id="remember_me" type="checkbox" name="remember_me" /> 
+                <label for="remember_me">Remember Me </label>
+            </div>
 
-        <input id="submit" type="submit" value="login" />
-    </form>
+            <input id="submit" class="submit" type="submit" value="Login to Continue" />
+        </form>
 
-    <!-- Error message -->
-    <div id="error-message" class="alert alert-danger <?php echo isset($_GET['error']) ? '' : 'd-none'; ?>">
-        <?php echo isset($_GET['error']) ? urldecode($_GET['error']) : ''; ?>
+        <!-- Error message -->
+        <div id="error-message" class="alert alert-danger <?php echo isset($_GET['error']) ? '' : 'd-none'; ?>">
+            <?php echo isset($_GET['error']) ? urldecode($_GET['error']) : ''; ?>
+        </div>
     </div>
 </body>
 </html>

@@ -1,3 +1,11 @@
+body {
+  margin: 0;
+  transition: all 0.5s ease-in-out;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+}
+
 .SalesByDate,
 .SalesByCategory,
 .Top10ProductsByQuantity,

@@ -13,6 +13,6 @@
     }
 
     // Redirect to the login page
-    header("location: /thirteaann-pos/index.php");
+    header("location: ../index.php");
     exit();
 ?>

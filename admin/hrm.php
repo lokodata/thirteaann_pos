@@ -11,6 +11,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="../styles/hrm.css">
 </head>
 <body>
     <!-- Add Staff Modal -->
@@ -119,48 +120,52 @@
         </div>
     </div>
 
-    <h1>Staff Management</h1>
+    <?php require "../config/admin-sidebar.php"; ?>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staffAddModal">Add New Staff</button>
+    <div class="main-content">
+        <h1>Staff Management</h1>
 
-    <table class="table" id="staff_table">
-        <thead>
-            <tr>
-                <th>Staff ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Contact Number</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                require '../config/config.php';
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staffAddModal">Add New Staff</button>
 
-                $stmt = $mysqli->prepare("SELECT user_id, name, email, role, contact_number FROM staff_table");
-                $stmt->execute();
-                $stmt->bind_result($user_id, $name, $email, $role, $contact_number);
+        <table class="table" id="staff_table">
+            <thead>
+                <tr>
+                    <th>Staff ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Contact Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    require '../config/config.php';
 
-                while ($stmt->fetch()) {
-                    echo "<tr>";
-                    echo "<td>$user_id</td>";
-                    echo "<td>$name</td>";
-                    echo "<td>$email</td>";
-                    echo "<td>$contact_number</td>";
-                    echo "<td>$role</td>";
-                    echo "<td>
-                            <button class='btn btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#staffEditModal' data-user-id='$user_id'> Edit </button>
+                    $stmt = $mysqli->prepare("SELECT user_id, name, email, role, contact_number FROM staff_table");
+                    $stmt->execute();
+                    $stmt->bind_result($user_id, $name, $email, $role, $contact_number);
 
-                            <button class='btn btn-danger delete-btn' data-user-id='$user_id'> Delete </button>
-                        </td>";
-                    echo "</tr>";
-                }
+                    while ($stmt->fetch()) {
+                        echo "<tr>";
+                        echo "<td>$user_id</td>";
+                        echo "<td>$name</td>";
+                        echo "<td>$email</td>";
+                        echo "<td>$contact_number</td>";
+                        echo "<td>$role</td>";
+                        echo "<td>
+                                <button class='btn btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#staffEditModal' data-user-id='$user_id'> Edit </button>
 
-                $stmt->close();
-            ?>
-        </tbody>
-    </table>
+                                <button class='btn btn-danger delete-btn' data-user-id='$user_id'> Delete </button>
+                            </td>";
+                        echo "</tr>";
+                    }
+
+                    $stmt->close();
+                ?>
+            </tbody>
+        </table>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -35,95 +35,99 @@
         </div>
     </div>
 
-    <h1>Order History</h1>
+    <?php require "../config/admin-sidebar.php"; ?>
 
-    <table class="table" id="orderHistory_table">
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Date</th>
-                <th>Items</th>
-                <th>Total Price</th>
-                <th>Payment</th>
-                <th>Change</th>
-                <th>Payment Method</th>
-                <th>Receipt ID</th>
-                <th>Receipt</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                require '../config/config.php';
+    <div class="main-content">
+        <h1>Order History</h1>
 
-                $stmt = $mysqli->prepare("SELECT * FROM order_table");
-                $stmt->execute();
-                $stmt->bind_result($order_id, $date, $receipt_id, $total_price, $payment_received, $exact_change, $payment_method);
+        <table class="table" id="orderHistory_table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Items</th>
+                    <th>Total Price</th>
+                    <th>Payment</th>
+                    <th>Change</th>
+                    <th>Payment Method</th>
+                    <th>Receipt ID</th>
+                    <th>Receipt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    require '../config/config.php';
 
-                // Initialize an array to store the results
-                $orderResults = [];
+                    $stmt = $mysqli->prepare("SELECT * FROM order_table");
+                    $stmt->execute();
+                    $stmt->bind_result($order_id, $date, $receipt_id, $total_price, $payment_received, $exact_change, $payment_method);
 
-                while ($stmt->fetch()) {
-                    // Store each row in the array
-                    $orderResults[] = [
-                        'order_id' => $order_id,
-                        'date' => $date,
-                        'receipt_id' => $receipt_id,
-                        'total_price' => $total_price,
-                        'payment_received' => $payment_received,
-                        'exact_change' => $exact_change,
-                        'payment_method' => $payment_method
-                    ];
-                }
+                    // Initialize an array to store the results
+                    $orderResults = [];
 
-                // Close the statement
-                $stmt->close();
-
-                $stmt = $mysqli->prepare("SELECT * FROM order_items");
-                $stmt->execute();
-                $stmt->bind_result($order_item_id, $order_id, $product_id, $product_name, $size, $price, $quantity, $total_price);
-
-                $orderItems = [];
-
-                while ($stmt->fetch()) {
-                    $orderItems[] = [
-                        'order_id' => $order_id,
-                        'product_id' => $product_id,
-                        'product_name' => $product_name,
-                        'size' => $size,
-                        'quantity' => $quantity,
-                        'total_price' => $total_price,
-                    ];
-                }
-
-                // Echo the results into the table using a different while loop
-                foreach ($orderResults as $order) {
-                    echo "<tr>";    
-                    echo "<td>{$order['order_id']}</td>";
-                    echo "<td>{$order['date']}</td>";
-                    echo "<td>";
-                    foreach ($orderItems as $orderItem) {
-                        if ($orderItem['order_id'] == $order['order_id']) {
-                            echo "{$orderItem['product_name']} ({$orderItem['size']}) - Quantity: {$orderItem['quantity']} - Total Price: {$orderItem['total_price']}<br>";
-                        }
+                    while ($stmt->fetch()) {
+                        // Store each row in the array
+                        $orderResults[] = [
+                            'order_id' => $order_id,
+                            'date' => $date,
+                            'receipt_id' => $receipt_id,
+                            'total_price' => $total_price,
+                            'payment_received' => $payment_received,
+                            'exact_change' => $exact_change,
+                            'payment_method' => $payment_method
+                        ];
                     }
-                    echo "</td>";
-                    echo "<td>{$order['total_price']}</td>";
-                    echo "<td>{$order['payment_received']}</td>";
-                    echo "<td>{$order['exact_change']}</td>";
-                    echo "<td>{$order['payment_method']}</td>";
-                    echo "<td>{$order['receipt_id']}</td>";
-                    echo "<td>
-                            <button class='btn btn-primary'
-                                    data-order-id='{$order['order_id']}'
-                                    id='receiptBtn'>
-                                Receipt
-                            </button>
-                        </td>";
-                    echo "</tr>";
-                }
-            ?>
-        </tbody>
-    </table>
+
+                    // Close the statement
+                    $stmt->close();
+
+                    $stmt = $mysqli->prepare("SELECT * FROM order_items");
+                    $stmt->execute();
+                    $stmt->bind_result($order_item_id, $order_id, $product_id, $product_name, $size, $price, $quantity, $total_price);
+
+                    $orderItems = [];
+
+                    while ($stmt->fetch()) {
+                        $orderItems[] = [
+                            'order_id' => $order_id,
+                            'product_id' => $product_id,
+                            'product_name' => $product_name,
+                            'size' => $size,
+                            'quantity' => $quantity,
+                            'total_price' => $total_price,
+                        ];
+                    }
+
+                    // Echo the results into the table using a different while loop
+                    foreach ($orderResults as $order) {
+                        echo "<tr>";    
+                        echo "<td>{$order['order_id']}</td>";
+                        echo "<td>{$order['date']}</td>";
+                        echo "<td>";
+                        foreach ($orderItems as $orderItem) {
+                            if ($orderItem['order_id'] == $order['order_id']) {
+                                echo "{$orderItem['product_name']} ({$orderItem['size']}) - Quantity: {$orderItem['quantity']} - Total Price: {$orderItem['total_price']}<br>";
+                            }
+                        }
+                        echo "</td>";
+                        echo "<td>{$order['total_price']}</td>";
+                        echo "<td>{$order['payment_received']}</td>";
+                        echo "<td>{$order['exact_change']}</td>";
+                        echo "<td>{$order['payment_method']}</td>";
+                        echo "<td>{$order['receipt_id']}</td>";
+                        echo "<td>
+                                <button class='btn btn-primary'
+                                        data-order-id='{$order['order_id']}'
+                                        id='receiptBtn'>
+                                    Receipt
+                                </button>
+                            </td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

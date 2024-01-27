@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2024 at 04:03 PM
+-- Generation Time: Jan 26, 2024 at 01:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,13 +43,30 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `product_name`, `size`, `price`, `quantity`, `total_price`) VALUES
-(1, 5, 3, 'Mango Cheesecake', '500 ml', 49.00, 1, 49.00),
-(2, 5, 19, 'Berry Cafe', 'Regular', 49.00, 1, 49.00),
-(3, 5, 19, 'Berry Cafe', 'Regular', 49.00, 1, 49.00),
-(4, 6, 112, 'Green Apple Yogurt', '500 ml', 39.00, 1, 39.00),
-(5, 6, 115, 'Passion Fruit Yogurt', '500 ml', 39.00, 1, 39.00),
-(6, 6, 111, 'Blueberry Yogurt', '500 ml', 49.00, 1, 49.00),
-(7, 6, 111, 'Blueberry Yogurt', '500 ml', 49.00, 1, 49.00);
+(1, 1, 1, 'Blueberry Cheesecake', '500 ml', 49.00, 1, 49.00),
+(2, 1, 6, 'Choco Cloud', '500 ml', 49.00, 2, 98.00),
+(3, 2, 11, 'Cheesecake', '700 ml', 49.00, 3, 147.00),
+(4, 3, 19, 'Berry Cafe', 'Regular', 49.00, 1, 49.00),
+(5, 5, 24, 'Coffee Jelly', 'Regular', 49.00, 1, 49.00),
+(6, 6, 3, 'Mango Cheesecake', '500 ml', 49.00, 2, 98.00),
+(7, 7, 14, 'Strawberry Cheesecake', '700 ml', 59.00, 1, 59.00),
+(8, 8, 22, 'Caramel Machiato', 'Regular', 49.00, 3, 147.00),
+(9, 9, 28, 'Salted Toffee Nut', 'Regular', 49.00, 1, 49.00),
+(10, 10, 30, 'Sunset Coffee', 'Regular', 49.00, 4, 196.00),
+(11, 11, 7, 'Mango Float', '500 ml', 69.00, 1, 69.00),
+(12, 12, 15, 'Choco Cloud', '700 ml', 64.00, 2, 128.00),
+(13, 13, 25, 'Dirty Matcha', 'Regular', 49.00, 1, 49.00),
+(14, 14, 17, 'Matcha Cloud', '700 ml', 64.00, 3, 192.00),
+(15, 15, 29, 'Sparkling Coffee', 'Regular', 49.00, 4, 196.00),
+(16, 16, 1, 'Blueberry Cheesecake', '500 ml', 49.00, 1, 49.00),
+(17, 16, 2, 'Cheesecake', '500 ml', 39.00, 1, 39.00),
+(18, 16, 3, 'Mango Cheesecake', '500 ml', 49.00, 1, 49.00),
+(19, 17, 1, 'Blueberry Cheesecake', '500 ml', 147.00, 3, 147.00),
+(20, 18, 10, 'Blueberry Cheesecake', '700 ml', 59.00, 2, 118.00),
+(21, 18, 26, 'Himalayan Cafe', 'Regular', 64.00, 1, 64.00),
+(22, 19, 14, 'Strawberry Cheesecake', '700 ml', 59.00, 3, 177.00),
+(23, 19, 21, 'Cafe Mocha', 'Regular', 49.00, 2, 98.00),
+(24, 20, 1, 'Blueberry Cheesecake', '500 ml', 343.00, 7, 343.00);
 
 -- --------------------------------------------------------
 
@@ -72,9 +89,26 @@ CREATE TABLE `order_table` (
 --
 
 INSERT INTO `order_table` (`order_id`, `date`, `receipt_id`, `total_price`, `payment_received`, `exact_change`, `payment_method`) VALUES
-(4, '2024-01-23', 'REC1', 147.00, 500.00, 353.00, 'Cash'),
-(5, '2024-01-23', 'REC2', 147.00, 500.00, 353.00, 'Cash'),
-(6, '2024-01-23', 'REC3', 176.00, 500.00, 324.00, 'Cash');
+(1, '2022-01-10', 'REC001', 98.00, 100.00, 2.00, 'Cash'),
+(2, '2022-03-15', 'REC002', 142.00, 150.00, 8.00, 'Card'),
+(3, '2022-05-20', 'REC003', 176.00, 180.00, 4.00, 'Cash'),
+(4, '2022-08-03', 'REC004', 98.00, 100.00, 2.00, 'Card'),
+(5, '2022-11-12', 'REC005', 98.00, 100.00, 2.00, 'Cash'),
+(6, '2023-02-18', 'REC006', 176.00, 180.00, 4.00, 'Cash'),
+(7, '2023-04-30', 'REC007', 196.00, 200.00, 4.00, 'Card'),
+(8, '2023-07-08', 'REC008', 282.00, 300.00, 18.00, 'Cash'),
+(9, '2023-09-22', 'REC009', 142.00, 150.00, 8.00, 'Card'),
+(10, '2023-12-05', 'REC010', 224.00, 230.00, 6.00, 'Cash'),
+(11, '2024-03-14', 'REC011', 176.00, 180.00, 4.00, 'Card'),
+(12, '2024-06-25', 'REC012', 224.00, 230.00, 6.00, 'Cash'),
+(13, '2024-09-10', 'REC013', 122.00, 130.00, 8.00, 'Card'),
+(14, '2024-11-28', 'REC014', 196.00, 200.00, 4.00, 'Cash'),
+(15, '2024-12-30', 'REC015', 282.00, 300.00, 18.00, 'Card'),
+(16, '2024-01-25', 'REC16', 137.00, 200.00, 63.00, 'Cash'),
+(17, '2024-01-25', 'REC17', 147.00, 300.00, 153.00, 'Gcash'),
+(18, '2024-01-25', 'REC016', 120.00, 130.00, 10.00, 'Card'),
+(19, '2023-12-25', 'REC017', 150.00, 160.00, 10.00, 'Cash'),
+(20, '2024-01-26', 'REC18', 343.00, 500.00, 157.00, 'Cash');
 
 -- --------------------------------------------------------
 
@@ -240,8 +274,7 @@ CREATE TABLE `staff_table` (
 
 INSERT INTO `staff_table` (`user_id`, `email`, `password`, `role`, `name`, `contact_number`) VALUES
 (1, 'admin@example.com', '$2y$10$W9ogqXnEVAILYXiirZzfVu.KKS/fVOhh/SKwyGN1WyFbYePiiCRAm', 'Admin', 'Admin Name', '123-456-7890'),
-(2, 'staff@example.com', '$2y$10$1OaWAJ5x5Hz/0rUqhrJa/OLhKoxhytKxXyBIUuC.fe48MIy6VLfPK', 'Staff', 'Staff Name', '987-654-3210'),
-(12, 'sadasd@email.com', '$2y$10$2nb3nTYl7SkjTn2jB98apO8cuKP.yVEMQHGvJKzB2gsecfsDRhJcm', 'Staff', 'est', '213988123');
+(2, 'staff@example.com', '$2y$10$1OaWAJ5x5Hz/0rUqhrJa/OLhKoxhytKxXyBIUuC.fe48MIy6VLfPK', 'Staff', 'Staff Name', '987-654-3210');
 
 --
 -- Indexes for dumped tables
@@ -282,13 +315,13 @@ ALTER TABLE `staff_table`
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `product_table`
