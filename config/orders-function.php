@@ -1,5 +1,6 @@
 <?php
-// order-function.php
+
+// Get the product from the product table to order table and display it in the order table
 
 require '../config/config.php';
 

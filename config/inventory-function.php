@@ -1,5 +1,7 @@
 <?php 
 
+// Code for inventory add, edit, delete product
+
 require '../config/config.php';
 
 // Delete product

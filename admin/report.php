@@ -1,4 +1,5 @@
 <?php
+    // Checks if the user is an admin
     require "../config/admin-authentication.php";
 ?>
 
@@ -16,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Sidebar Navigator -->
     <?php require "../config/admin-sidebar.php"; ?>
 
     <div class="main-content">
@@ -30,6 +32,8 @@
                     <img src="../assets/dashboard_assets/trophy.svg" alt="Trophy">
                 </div>
                 <hr>
+
+                <!-- Get Product with Highest Revenue -->
                 <?php 
                     $result = $mysqli->query("SELECT product_id, product_name, SUM(total_price) AS total_revenue FROM order_items GROUP BY product_id, product_name ORDER BY total_revenue DESC LIMIT 1;");
                     
@@ -51,6 +55,8 @@
                     <img src="../assets/sidebar_assets/orders-vector.svg" alt="Orders">
                 </div>
                 <hr>
+
+                <!-- Get Day with Most Orders -->
                 <?php 
                     $result = $mysqli->query("SELECT DATE_FORMAT(date, '%W') AS orderDay, COUNT(*) AS totalOrders FROM order_table GROUP BY orderDay ORDER BY totalOrders DESC LIMIT 1;");
                     
@@ -72,6 +78,8 @@
                     <img src="../assets/report_assets/bulb.svg" alt="Growth">
                 </div>
                 <hr>
+
+                <!-- Get Revenue Growth % -->
                 <?php 
                     $result = $mysqli->query("WITH MonthlyRevenue AS (SELECT DATE_FORMAT(date, '%Y-%m') AS month, SUM(total_price) AS total_revenue FROM order_table GROUP BY month)
                     SELECT m1.month AS current_month, m1.total_revenue AS current_month_revenue, m2.month AS previous_month, m2.total_revenue AS previous_month_revenue, (m1.total_revenue - m2.total_revenue) / ABS(m2.total_revenue) * 100 AS revenue_growth_percentage FROM MonthlyRevenue m1 JOIN MonthlyRevenue m2 ON m1.month = DATE_FORMAT(CURDATE(), '%Y-%m') AND m2.month = DATE_FORMAT(CURDATE() - INTERVAL 1 MONTH, '%Y-%m');

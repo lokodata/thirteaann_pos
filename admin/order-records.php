@@ -1,4 +1,5 @@
 <?php
+    // Checks if the user is an admin
     require "../config/admin-authentication.php";
 ?>
 
@@ -39,6 +40,7 @@
         </div>
     </div>
 
+    <!-- Sidebar Navigator -->
     <?php require "../config/admin-sidebar.php"; ?>
 
     <div class="main-content">
@@ -60,6 +62,8 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <!-- Get All Orders and Order Items and Populate it to table -->
                     <?php
                         require '../config/config.php';
 
@@ -140,6 +144,8 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
+
+        // Change table to DataTable of jQuery
         function initializeDataTable() {
             $('#orderHistory_table').DataTable({
                 paging: true,
@@ -153,6 +159,7 @@
             initializeDataTable();
         });
 
+        // When the receipt button is clicked, get the order ID and display the order information
         $(document).on('click', '#receiptBtn', function() {
             // Get the order ID from the data-order-id attribute
             const orderId = $(this).data('order-id');
@@ -162,6 +169,7 @@
             displayOrderInformation(orderInfo);
         });
 
+        // Display the order information in the modal
         function displayOrderInformation(orderInfo) {
             var currentDateElement = document.getElementById('currentDate');
             currentDateElement.textContent = orderInfo.order['date'];
@@ -195,7 +203,7 @@
             $('#receiptModal').modal('show');
         }
 
-
+        // Print the modal body
         function printModalBody() {
             try {
                 // Show the modal content
@@ -211,6 +219,7 @@
             }
         }
 
+        // Get the order data from PHP
         function getOrderData() {
             var orderResults = <?php echo json_encode($orderResults); ?>;
             var orderItems = <?php echo json_encode($orderItems); ?>;

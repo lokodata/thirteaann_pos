@@ -1,4 +1,5 @@
 <?php
+    // Checks if the user is an admin
     require "../config/admin-authentication.php";
 ?>
 
@@ -142,6 +143,7 @@
         </div>
     </div>
 
+    <!-- Sidebar Navigator -->
     <?php require "../config/admin-sidebar.php"; ?>
     
     <div class="main-content">
@@ -164,6 +166,8 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <!-- Query All Products and Populate to Table-->
                     <?php
                         require '../config/config.php';
 
@@ -198,7 +202,7 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
-
+        // Change table to DataTable of jQuery
         function initializeDataTable() {
             $('#product_table').DataTable({
                 paging: true,

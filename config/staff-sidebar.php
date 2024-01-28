@@ -1,3 +1,4 @@
+<!-- Code that generates the sidebar navigator for staff -->
 
 <style>
     body {

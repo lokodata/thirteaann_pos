@@ -1,4 +1,5 @@
 <?php
+    // Checks if the user is a staff
     require "../config/staff-authentication.php";
 ?>
 
@@ -41,11 +42,14 @@
         </div>
     </div>
 
+    <!-- Sidebar Navigator -->
     <?php require "../config/staff-sidebar.php"; ?>
     
     <div class="main-content">
         <div class="inventory">
             <div class="categories">
+
+                <!-- Get All Category and Populate as buttons for Filter -->
                 <?php
                     require '../config/config.php';
                     
@@ -77,6 +81,8 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <!-- Query All Products and Populate to Table-->
                     <?php
                         require '../config/config.php';
 
@@ -170,6 +176,7 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
+        // Change table to DataTable of jQuery
         function initializeDataTable() {
             $('#product_table').DataTable({
                 paging: true,
@@ -182,6 +189,7 @@
             initializeDataTable();
         });
 
+        // Function to filter the products by category
         function filterByCategory(selectedCategory) {
             var table = $('#product_table').DataTable();
 
@@ -221,6 +229,7 @@
 
         var selectedProducts = [];
 
+        // Handle click event on the product table to order table
         $(document).on('click', '#product_table tbody tr', function() {
             var productId = $(this).data('product-id');
 
@@ -249,7 +258,7 @@
             }
         });
 
-
+        // Handle change event that affect quantity increase
         window.incrementQuantity = function(button) {
             var inputElement = $(button).parent().prev().find('input[name="quantity"]');
             var currentQuantity = parseInt(inputElement.val(), 10);
@@ -261,6 +270,7 @@
             updateExactChange();
         }   
 
+        // Handle change event that affect quantity decrease
         window.decrementQuantity = function(button) {
             var inputElement = $(button).parent().prev().find('input[name="quantity"]');
             var currentQuantity = parseInt(inputElement.val(), 10);
@@ -289,6 +299,8 @@
             saveOrder(formData);
         });
 
+
+        // Function to save the order to the database
         function saveOrder(formData) {
             // Make an AJAX request to save-order.php
             $.ajax({
@@ -312,6 +324,7 @@
             });
         }
 
+        // Function to gather form data
         function gatherFormData() {
             var formData = {
                 products: []
@@ -346,6 +359,7 @@
             return formData;
         }
 
+        // Function to print the form data to modal body print
         function displayOrderInformation(formData) {
             var orderInformationHtml = '<div class="asterisk-line"></div>';
             formData.products.forEach(function(product) {

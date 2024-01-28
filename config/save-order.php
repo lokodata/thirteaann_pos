@@ -1,5 +1,7 @@
 <?php
 
+// Save all the data in order to database and return a form data for print 
+
 require '../config/config.php';
 
 // Create an associative array to hold the response data

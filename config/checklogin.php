@@ -1,4 +1,7 @@
 <?php
+
+// Code to check if user and password are correct and remember me function
+
 // Function to generate a secure token for remember me
 function generateToken() {
     // Generate a random string using random_bytes

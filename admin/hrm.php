@@ -1,4 +1,5 @@
 <?php
+    // Checks if the user is an admin
     require "../config/admin-authentication.php";
 ?>
 
@@ -124,6 +125,7 @@
         </div>
     </div>
 
+    <!-- Sidebar Navigator -->
     <?php require "../config/admin-sidebar.php"; ?>
 
     <div class="main-content">
@@ -146,6 +148,8 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <!-- Get All Staff Data and Populate to Table with Actions -->
                     <?php
                         require '../config/config.php';
 
@@ -179,7 +183,7 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
-
+        // Change table to DataTable of jQuery
         function initializeDataTable() {
             if ($.fn.DataTable.isDataTable('#staff_table')) {
                 $('#staff_table').DataTable().destroy();

@@ -1,4 +1,7 @@
 <?php
+
+    // Code to check if a user is logged in if admin or staff then go to respective dashboard
+
     session_start();
 
     include 'config/config.php';

@@ -1,4 +1,5 @@
 <?php
+    // Checks if the user is an admin
     require "../config/admin-authentication.php";
 ?>
 
@@ -18,6 +19,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 </head>
 <body>
+    <!-- Sidebar Navigator -->
     <?php require "../config/admin-sidebar.php"; ?>
 
     <div class="main-content">
@@ -30,6 +32,8 @@
                     <img src="../assets/dashboard_assets/trophy.svg" alt="Trophy">
                 </div>
                 <hr>
+
+                <!-- Get Most Popular Product -->
                 <?php 
                     $result = $mysqli->query("SELECT product_name, SUM(quantity) as total_quantity FROM order_items GROUP BY product_name ORDER BY total_quantity DESC LIMIT 1;");
 
@@ -50,6 +54,8 @@
                     <img src="../assets/dashboard_assets/orders.svg" alt="Orders">
                 </div>
                 <hr>
+
+                <!-- Get Count of All Orders -->
                 <?php 
                     $result = $mysqli->query("SELECT COUNT(*) AS total_orders FROM order_table;");
 
@@ -70,6 +76,8 @@
                     <img src="../assets/dashboard_assets/trophy.svg" alt="Trophy">
                 </div>
                 <hr>
+
+                <!-- Get Sum of All Total Prices -->
                 <?php 
                     $result = $mysqli->query("SELECT SUM(total_price) AS total_sales FROM order_table;");
 
@@ -97,6 +105,8 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <!-- Query All Orders and Populate to Table-->
                     <?php
                         require '../config/config.php';
 
@@ -154,6 +164,7 @@
     </div>
 
     <script>
+        // Change table to DataTable of jQuery
         function initializeDataTable() {
             $('#recent_orders').DataTable({
                 paging: true,

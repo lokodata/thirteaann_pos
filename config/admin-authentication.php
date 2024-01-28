@@ -1,4 +1,6 @@
 <?php
+    // Code to check if the user is logged in and is an admin
+
     session_start();
 
     require '../config/config.php';

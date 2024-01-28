@@ -1,5 +1,7 @@
 <?php 
 
+// Code for HRM add, edit, delete staff
+
 require '../config/config.php';
 
 // Delete staff

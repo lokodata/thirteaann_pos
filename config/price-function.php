@@ -1,5 +1,6 @@
 <?php
-// price-function.php 
+
+// Code for price calculation in orders.php
 
 require '../config/config.php';
 
