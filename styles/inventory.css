@@ -30,27 +30,23 @@ body {
 }
 
 .table-section {
-  background-color: white;
+  background-color: #ffffff;
   padding: 20px;
 
   border-radius: 20px;
 }
 
-/* Style for the DataTable */
 #product_table_wrapper {
-  border: none; /* Remove default DataTable border */
-}
-
-#product_table thead {
-  background-color: #f7f8fa; /* Set background color for the table head */
+  border: none;
 }
 
 #product_table th {
-  border: none; /* Remove borders for table head cells */
+  border: none;
+  background-color: #f7f8fa !important;
 }
 
 #product_table td {
-  border: none; /* Remove borders for table cells */
+  border: none;
 }
 
 button {
