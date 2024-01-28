@@ -11,6 +11,10 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
     <link rel="stylesheet" href="../styles/inventory.css">
 </head>
@@ -141,57 +145,72 @@
     <?php require "../config/admin-sidebar.php"; ?>
     
     <div class="main-content">
-        <h1>Inventory Management</h1>
+        <div class="header">
+            <h1>Inventory Management</h1>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productAddModal">Add New Product</button>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#productAddModal">Add New Product</button>
+        </div>
 
-        <table class="table" id="product_table">
-            <thead>
-                <tr>
-                    <th>Product Image</th>
-                    <th>Product Name</th>
-                    <th>Size</th>
-                    <th>Unit Price</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    require '../config/config.php';
+        <div class="table-section">
+            <table class="table" id="product_table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Product Name</th>
+                        <th>Size</th>
+                        <th>Unit Price</th>
+                        <th>Category</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        require '../config/config.php';
 
-                    $stmt = $mysqli->prepare("SELECT * FROM product_table");
-                    $stmt->execute();
-                    $stmt->bind_result($product_id, $product_image, $product_name, $size, $price, $category);
+                        $stmt = $mysqli->prepare("SELECT * FROM product_table");
+                        $stmt->execute();
+                        $stmt->bind_result($product_id, $product_image, $product_name, $size, $price, $category);
 
-                    while ($stmt->fetch()) {
-                        echo "<tr>";    
-                        echo "<td><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
+                        while ($stmt->fetch()) {
+                            echo "<tr>";    
+                            echo "<td><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
 
-                        echo "<td>$product_name</td>";
-                        echo "<td>$size</td>";
-                        echo "<td>$price</td>";
-                        echo "<td>$category</td>";
-                        echo "<td>
-                                <button class='btn btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#productEditModal' data-product-id='$product_id'> Edit </button>
+                            echo "<td>$product_name</td>";
+                            echo "<td>$size</td>";
+                            echo "<td>$price</td>";
+                            echo "<td>$category</td>";
+                            echo "<td>
+                                    <button class='btn edit-btn' data-bs-toggle='modal' data-bs-target='#productEditModal' data-product-id='$product_id'> Edit </button>
 
-                                <button class='btn btn-danger delete-btn' data-product-id='$product_id'> Delete </button>
-                            </td>";
-                        echo "</tr>";
-                    }
+                                    <button class='btn delete-btn' data-product-id='$product_id'> Delete </button>
+                                </td>";
+                            echo "</tr>";
+                        }
 
-                    $stmt->close();
-                ?>
-            </tbody>
-        </table>
+                        $stmt->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
 
+        function initializeDataTable() {
+            $('#product_table').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthMenu: [10, 25, 50, 100],
+            });
+        }
+
+        $(document).ready(function () {
+            initializeDataTable();
+        });
+        
         // add Product
         $(document).on('submit', '#saveProduct', function(e) {
             e.preventDefault();
@@ -220,7 +239,7 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        $('#product_table').load(location.href + " #product_table")
+                        initializeDataTable();
                     }
                 }
             });
@@ -294,13 +313,13 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        $('#product_table').load(location.href + " #product_table");
+                        initializeDataTable();
                     }
                 }
             });
         });
 
-        // delete Staff
+        // delete product
         $(document).on('click', '.delete-btn', function(e) {
             e.preventDefault();
 
@@ -325,7 +344,7 @@
                             alertify.set('notifier','position', 'bottom-right');
                             alertify.success(res.message);
 
-                            $('#product_table').load(location.href + " #product_table");
+                            initializeDataTable();
                         }
                     }
                 });

@@ -6,7 +6,54 @@ body {
   height: 100vh;
 }
 
+.main-content {
+  padding: 20px;
+
+  background-color: #eff3fd;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
 .product_image {
   width: 50px;
   height: 50px;
+}
+
+.main-content {
+  overflow-y: auto;
+}
+
+.table-section {
+  background-color: white;
+  padding: 20px;
+
+  border-radius: 20px;
+}
+
+/* Style for the DataTable */
+#product_table_wrapper {
+  border: none; /* Remove default DataTable border */
+}
+
+#product_table thead {
+  background-color: #f7f8fa; /* Set background color for the table head */
+}
+
+#product_table th {
+  border: none; /* Remove borders for table head cells */
+}
+
+#product_table td {
+  border: none; /* Remove borders for table cells */
+}
+
+button {
+  background-color: #5f66e9 !important;
+  color: white !important;
 }

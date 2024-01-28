@@ -19,7 +19,7 @@
         flex-direction: column;
         justify-content: space-between;
 
-        padding: 30px 20px;
+        padding: 30px 15px;
     }
 
     .sidebar-wrapper ol {
@@ -30,7 +30,6 @@
     .logo-container {
         display: flex;
         flex-direction: column;
-        align-items: center;
 
         margin-bottom: 50px;
     }
@@ -41,17 +40,16 @@
     }
 
     .logo {
-        width: 50px;
-        height: 50px;
+        width: 120px;
+        height: 120px;
 
-        margin: 0 auto 5px auto;
         border-radius: 50%;
     }
 
     .link-img {
         width: 24px;
         height: 24px;
-        margin-right: 10px;
+        margin-right: 5px;
     }
 
     .sidebar ol {
@@ -86,8 +84,7 @@
 <div class="sidebar-wrapper">
     <div class="upper">
         <div class="logo-container">
-            <img class="logo" src="../assets/thirteaann-logo.svg" alt="ThirTeaAnn">
-            <h1>ThirTeaAnn</h1>
+            <img class="logo" src="../assets/logo-2.svg" alt="ThirTeaAnn">
         </div>
 
         <ol>
