@@ -71,8 +71,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Product</button>
+                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn">Save Product</button>
                     </div>
                 </form>
             </div>
@@ -134,8 +134,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update Product</button>
+                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn">Update Product</button>
                     </div>
                 </form>
             </div>
@@ -203,7 +203,7 @@
             $('#product_table').DataTable({
                 paging: true,
                 pageLength: 10,
-                lengthMenu: [10, 25, 50, 100],
+                lengthChange: false,
             });
         }
 
@@ -239,7 +239,7 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        initializeDataTable();
+                        $('#product_table').load(location.href + " #product_table")
                     }
                 }
             });
@@ -313,7 +313,7 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        initializeDataTable();
+                        $('#product_table').load(location.href + " #product_table")
                     }
                 }
             });
@@ -344,7 +344,7 @@
                             alertify.set('notifier','position', 'bottom-right');
                             alertify.success(res.message);
 
-                            initializeDataTable();
+                            $('#product_table').load(location.href + " #product_table")
                         }
                     }
                 });

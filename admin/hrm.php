@@ -12,6 +12,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="../styles/hrm.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 </head>
 <body>
     <!-- Add Staff Modal -->
@@ -58,8 +62,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Staff</button>
+                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn">Save Staff</button>
                     </div>
                 </form>
             </div>
@@ -112,8 +116,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update Staff</button>
+                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn">Update Staff</button>
                     </div>
                 </form>
             </div>
@@ -123,55 +127,75 @@
     <?php require "../config/admin-sidebar.php"; ?>
 
     <div class="main-content">
-        <h1>Staff Management</h1>
+        <div class="header">
+            <h1>Staff Management</h1>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staffAddModal">Add New Staff</button>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staffAddModal">Add New Staff</button>
+        </div>
+        
+        <div class="table-section">
+            <table class="table" id="staff_table">
+                <thead>
+                    <tr>
+                        <th>Staff ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Contact Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        require '../config/config.php';
 
-        <table class="table" id="staff_table">
-            <thead>
-                <tr>
-                    <th>Staff ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Contact Number</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    require '../config/config.php';
+                        $stmt = $mysqli->prepare("SELECT user_id, name, email, role, contact_number FROM staff_table");
+                        $stmt->execute();
+                        $stmt->bind_result($user_id, $name, $email, $role, $contact_number);
 
-                    $stmt = $mysqli->prepare("SELECT user_id, name, email, role, contact_number FROM staff_table");
-                    $stmt->execute();
-                    $stmt->bind_result($user_id, $name, $email, $role, $contact_number);
+                        while ($stmt->fetch()) {
+                            echo "<tr>";
+                            echo "<td>$user_id</td>";
+                            echo "<td>$name</td>";
+                            echo "<td>$email</td>";
+                            echo "<td>$contact_number</td>";
+                            echo "<td>$role</td>";
+                            echo "<td>
+                                    <button class='btn edit-btn' data-bs-toggle='modal' data-bs-target='#staffEditModal' data-user-id='$user_id'> Edit </button>
 
-                    while ($stmt->fetch()) {
-                        echo "<tr>";
-                        echo "<td>$user_id</td>";
-                        echo "<td>$name</td>";
-                        echo "<td>$email</td>";
-                        echo "<td>$contact_number</td>";
-                        echo "<td>$role</td>";
-                        echo "<td>
-                                <button class='btn btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#staffEditModal' data-user-id='$user_id'> Edit </button>
+                                    <button class='btn delete-btn' data-user-id='$user_id'> Delete </button>
+                                </td>";
+                            echo "</tr>";
+                        }
 
-                                <button class='btn btn-danger delete-btn' data-user-id='$user_id'> Delete </button>
-                            </td>";
-                        echo "</tr>";
-                    }
-
-                    $stmt->close();
-                ?>
-            </tbody>
-        </table>
+                        $stmt->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
+
+        function initializeDataTable() {
+            if ($.fn.DataTable.isDataTable('#staff_table')) {
+                $('#staff_table').DataTable().destroy();
+            }
+
+            $('#staff_table').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthChange: false,
+            });
+        }
+
+        $(document).ready(function () {
+            initializeDataTable();
+        });
+
         // add Staff
         $(document).on('submit', '#saveStaff', function(e) {
             e.preventDefault();
@@ -267,7 +291,7 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        $('#staff_table').load(location.href + " #staff_table");
+                        $('#staff_table').load(location.href + " #staff_table")
                     }
                 }
             });
@@ -298,7 +322,7 @@
                             alertify.set('notifier','position', 'bottom-right');
                             alertify.success(res.message);
 
-                            $('#staff_table').load(location.href + " #staff_table");
+                            $('#staff_table').load(location.href + " #staff_table")
                         }
                     }
                 });

@@ -12,20 +12,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/dashboard.css">
     <?php include('../config/config.php'); ?>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 </head>
 <body>
     <?php require "../config/admin-sidebar.php"; ?>
 
     <div class="main-content">
+        <h1 class="title">Dashboard</h1>
+
         <div class="header">
             <div class="card">
-                <p>Best Seller</p>
+                <div class="card-title">
+                    <p>Most Popular</p>
+                    <img src="../assets/dashboard_assets/trophy.svg" alt="Trophy">
+                </div>
+                <hr>
                 <?php 
                     $result = $mysqli->query("SELECT product_name, SUM(quantity) as total_quantity FROM order_items GROUP BY product_name ORDER BY total_quantity DESC LIMIT 1;");
 
                     if ($result && $row = $result->fetch_assoc()) {
                         $productName = $row['product_name'];
-                        echo "<p>$productName</p>";
+                        echo "<h1>$productName</h1>";
                     } else {
                         echo "<p>No data found or error: " . $mysqli->error . "</p>";
                     }
@@ -33,14 +43,19 @@
                     $result->free();
                 ?>
             </div>
+
             <div class="card">
-                <p>Orders</p>
+                <div class="card-title">
+                    <p>Orders</p>
+                    <img src="../assets/dashboard_assets/orders.svg" alt="Orders">
+                </div>
+                <hr>
                 <?php 
                     $result = $mysqli->query("SELECT COUNT(*) AS total_orders FROM order_table;");
 
                     if ($result && $row = $result->fetch_assoc()) {
                         $totalOrders = $row['total_orders'];
-                        echo "<p>$totalOrders</p>";
+                        echo "<h1>$totalOrders</h1>";
                     } else {
                         echo "<p>No data found or error: " . $mysqli->error . "</p>";
                     }
@@ -48,14 +63,19 @@
                     $result->free();
                 ?>
             </div>
+
             <div class="card">
-                <p>Sales</p>
+                <div class="card-title">
+                    <p>Sales</p>
+                    <img src="../assets/dashboard_assets/trophy.svg" alt="Trophy">
+                </div>
+                <hr>
                 <?php 
                     $result = $mysqli->query("SELECT SUM(total_price) AS total_sales FROM order_table;");
 
                     if ($result && $row = $result->fetch_assoc()) {
                         $totalSales = $row['total_sales'];
-                        echo "<p>$totalSales</p>";
+                        echo "<h1>$totalSales</h1>";
                     } else {
                         echo "<p>No data found or error: " . $mysqli->error . "</p>";
                     }
@@ -63,11 +83,11 @@
                     $result->free();
                 ?>
             </div>
-            
+
         </div>
 
-        <div class="table-container">
-            <table class="table">
+        <div class="table-section">
+            <table class="table" id="recent_orders">
                 <thead>
                     <tr>
                         <th>Order ID</th>
@@ -132,6 +152,20 @@
             </table>
         </div>
     </div>
+
+    <script>
+        function initializeDataTable() {
+            $('#recent_orders').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthChange: false,
+            });
+        }
+
+        $(document).ready(function () {
+            initializeDataTable();
+        });
+    </script>
 
 <?php $mysqli->close(); ?>
 </body>

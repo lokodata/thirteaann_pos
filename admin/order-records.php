@@ -12,6 +12,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="../styles/order-records.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 </head>
 <body>
     <!-- Receipt Modal -->
@@ -29,7 +33,7 @@
 
                 <!-- button to print the modal-body exactly as what it looks like the size and information -->
                 <div class="modal-footer p-1 m-auto">
-                    <button type="button" class="btn btn-primary" onclick="printModalBody()">Print</button>
+                    <button type="button" class="btn" onclick="printModalBody()">Print</button>
                 </div>
             </div>
         </div>
@@ -40,100 +44,115 @@
     <div class="main-content">
         <h1>Order History</h1>
 
-        <table class="table" id="orderHistory_table">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Items</th>
-                    <th>Total Price</th>
-                    <th>Payment</th>
-                    <th>Change</th>
-                    <th>Payment Method</th>
-                    <th>Receipt ID</th>
-                    <th>Receipt</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    require '../config/config.php';
+        <div class="table-section">
+            <table class="table" id="orderHistory_table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Total Price</th>
+                        <th>Payment</th>
+                        <th>Change</th>
+                        <th>Payment Method</th>
+                        <th>Receipt ID</th>
+                        <th>Receipt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        require '../config/config.php';
 
-                    $stmt = $mysqli->prepare("SELECT * FROM order_table");
-                    $stmt->execute();
-                    $stmt->bind_result($order_id, $date, $receipt_id, $total_price, $payment_received, $exact_change, $payment_method);
+                        $stmt = $mysqli->prepare("SELECT * FROM order_table");
+                        $stmt->execute();
+                        $stmt->bind_result($order_id, $date, $receipt_id, $total_price, $payment_received, $exact_change, $payment_method);
 
-                    // Initialize an array to store the results
-                    $orderResults = [];
+                        // Initialize an array to store the results
+                        $orderResults = [];
 
-                    while ($stmt->fetch()) {
-                        // Store each row in the array
-                        $orderResults[] = [
-                            'order_id' => $order_id,
-                            'date' => $date,
-                            'receipt_id' => $receipt_id,
-                            'total_price' => $total_price,
-                            'payment_received' => $payment_received,
-                            'exact_change' => $exact_change,
-                            'payment_method' => $payment_method
-                        ];
-                    }
-
-                    // Close the statement
-                    $stmt->close();
-
-                    $stmt = $mysqli->prepare("SELECT * FROM order_items");
-                    $stmt->execute();
-                    $stmt->bind_result($order_item_id, $order_id, $product_id, $product_name, $size, $price, $quantity, $total_price);
-
-                    $orderItems = [];
-
-                    while ($stmt->fetch()) {
-                        $orderItems[] = [
-                            'order_id' => $order_id,
-                            'product_id' => $product_id,
-                            'product_name' => $product_name,
-                            'size' => $size,
-                            'quantity' => $quantity,
-                            'total_price' => $total_price,
-                        ];
-                    }
-
-                    // Echo the results into the table using a different while loop
-                    foreach ($orderResults as $order) {
-                        echo "<tr>";    
-                        echo "<td>{$order['order_id']}</td>";
-                        echo "<td>{$order['date']}</td>";
-                        echo "<td>";
-                        foreach ($orderItems as $orderItem) {
-                            if ($orderItem['order_id'] == $order['order_id']) {
-                                echo "{$orderItem['product_name']} ({$orderItem['size']}) - Quantity: {$orderItem['quantity']} - Total Price: {$orderItem['total_price']}<br>";
-                            }
+                        while ($stmt->fetch()) {
+                            // Store each row in the array
+                            $orderResults[] = [
+                                'order_id' => $order_id,
+                                'date' => $date,
+                                'receipt_id' => $receipt_id,
+                                'total_price' => $total_price,
+                                'payment_received' => $payment_received,
+                                'exact_change' => $exact_change,
+                                'payment_method' => $payment_method
+                            ];
                         }
-                        echo "</td>";
-                        echo "<td>{$order['total_price']}</td>";
-                        echo "<td>{$order['payment_received']}</td>";
-                        echo "<td>{$order['exact_change']}</td>";
-                        echo "<td>{$order['payment_method']}</td>";
-                        echo "<td>{$order['receipt_id']}</td>";
-                        echo "<td>
-                                <button class='btn btn-primary'
-                                        data-order-id='{$order['order_id']}'
-                                        id='receiptBtn'>
-                                    Receipt
-                                </button>
-                            </td>";
-                        echo "</tr>";
-                    }
-                ?>
-            </tbody>
-        </table>
+
+                        // Close the statement
+                        $stmt->close();
+
+                        $stmt = $mysqli->prepare("SELECT * FROM order_items");
+                        $stmt->execute();
+                        $stmt->bind_result($order_item_id, $order_id, $product_id, $product_name, $size, $price, $quantity, $total_price);
+
+                        $orderItems = [];
+
+                        while ($stmt->fetch()) {
+                            $orderItems[] = [
+                                'order_id' => $order_id,
+                                'product_id' => $product_id,
+                                'product_name' => $product_name,
+                                'size' => $size,
+                                'quantity' => $quantity,
+                                'total_price' => $total_price,
+                            ];
+                        }
+
+                        // Echo the results into the table using a different while loop
+                        foreach ($orderResults as $order) {
+                            echo "<tr>";    
+                            echo "<td>{$order['order_id']}</td>";
+                            echo "<td>{$order['date']}</td>";
+                            echo "<td>";
+                            foreach ($orderItems as $orderItem) {
+                                if ($orderItem['order_id'] == $order['order_id']) {
+                                    echo "{$orderItem['product_name']} ({$orderItem['size']}) - Quantity: {$orderItem['quantity']} - Total Price: {$orderItem['total_price']}<br>";
+                                }
+                            }
+                            echo "</td>";
+                            echo "<td>{$order['total_price']}</td>";
+                            echo "<td>{$order['payment_received']}</td>";
+                            echo "<td>{$order['exact_change']}</td>";
+                            echo "<td>{$order['payment_method']}</td>";
+                            echo "<td>{$order['receipt_id']}</td>";
+                            echo "<td>
+                                    <button class='btn'
+                                            data-order-id='{$order['order_id']}'
+                                            id='receiptBtn'>
+                                        Receipt
+                                    </button>
+                                </td>";
+                            echo "</tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
+        function initializeDataTable() {
+            $('#orderHistory_table').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthChange: false,
+                order: [[0, 'desc']]
+            });
+        }
+
+        $(document).ready(function () {
+            initializeDataTable();
+        });
+
         $(document).on('click', '#receiptBtn', function() {
             // Get the order ID from the data-order-id attribute
             const orderId = $(this).data('order-id');

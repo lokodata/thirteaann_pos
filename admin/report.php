@@ -10,6 +10,7 @@
     <title>ThirTeaAnn</title>
 
     <link rel="stylesheet" href="../styles/report.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <?php include('../config/config.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -22,65 +23,78 @@
         
         <p>Visualizing your business data to aid in your business decisions.</p>
 
-        <div class="card_1">
-            <?php 
-                $result = $mysqli->query("SELECT product_id, product_name, SUM(total_price) AS total_revenue FROM order_items GROUP BY product_id, product_name ORDER BY total_revenue DESC LIMIT 1;");
-                
-                if ($result && $row = $result->fetch_assoc()) {
-                    list($productId, $productName, $totalRevenue) = [$row['product_id'], $row['product_name'], $row['total_revenue']];
-                    echo "<p>Highest Selling Product</p>";
-                    echo "<p>Product ID: $productId</p>";
-                    echo "<p>Product Name: $productName</p>";
-                    echo "<p>Total Revenue: $totalRevenue</p>";
-                } else {
-                    echo "<p>No data found or error: " . $mysqli->error . "</p>";
-                }
-
-                $result->free();
-            ?>
-        </div>
-
-        <div class="card_2">
-            <?php 
-                $result = $mysqli->query("SELECT date, COUNT(*) AS total_orders FROM order_table GROUP BY date ORDER BY total_orders DESC LIMIT 1;");
-                
-                if ($result && $row = $result->fetch_assoc()) {
-                    list($orderDate, $totalOrders) = [$row['date'], $row['total_orders']];
-                    echo "<p>Day with Most Orders</p>";
-                    echo "<p>Order Date: $orderDate</p>";
-                    echo "<p>Total Orders: $totalOrders</p>";
-                } else {
-                    echo "<p>No data found or error: " . $mysqli->error . "</p>";
-                }
-
-                $result->free();
-            ?>
-        </div>
-
-        <div class="card_3">
-            <?php 
-                $result = $mysqli->query("WITH MonthlyRevenue AS (SELECT DATE_FORMAT(date, '%Y-%m') AS month, SUM(total_price) AS total_revenue FROM order_table GROUP BY month)
-                SELECT m1.month AS current_month, m1.total_revenue AS current_month_revenue, m2.month AS previous_month, m2.total_revenue AS previous_month_revenue, (m1.total_revenue - m2.total_revenue) / ABS(m2.total_revenue) * 100 AS revenue_growth_percentage FROM MonthlyRevenue m1 JOIN MonthlyRevenue m2 ON m1.month = DATE_FORMAT(CURDATE(), '%Y-%m') AND m2.month = DATE_FORMAT(CURDATE() - INTERVAL 1 MONTH, '%Y-%m');
-                ");
-
-                if ($result) {
-                    while ($row = $result->fetch_assoc()) {
-                        $currentMonth = $row['current_month'];
-                        $currentMonthRevenue = $row['current_month_revenue'];
-                        $previousMonth = $row['previous_month'];
-                        $previousMonthRevenue = $row['previous_month_revenue'];
-                        $revenueGrowthPercentage = $row['revenue_growth_percentage'];
-
-                        echo "<p>Revenue Growth</p>";
-                        echo "<p>Current Month Revenue: $currentMonthRevenue</p>";
-                        echo "<p>Previous Month Revenue: $previousMonthRevenue</p>";
-                        echo "<p>Revenue Growth Percentage: $revenueGrowthPercentage%</p>";
+        <div class="header">
+            <div class="card">
+                <div class="card-title">
+                    <p>Revenue Leader</p>
+                    <img src="../assets/dashboard_assets/trophy.svg" alt="Trophy">
+                </div>
+                <hr>
+                <?php 
+                    $result = $mysqli->query("SELECT product_id, product_name, SUM(total_price) AS total_revenue FROM order_items GROUP BY product_id, product_name ORDER BY total_revenue DESC LIMIT 1;");
+                    
+                    if ($result && $row = $result->fetch_assoc()) {
+                        list($productId, $productName, $totalRevenue) = [$row['product_id'], $row['product_name'], $row['total_revenue']];
+                        echo "<h1>$productName</p>";
+                        echo "<h6>Total Revenue: $totalRevenue</p>";
+                    } else {
+                        echo "<p>No data found or error: " . $mysqli->error . "</p>";
                     }
+
                     $result->free();
-                } else {
-                    echo "<p>No data found or error: " . $mysqli->error . "</p>";
-                }
-            ?>
+                ?>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <p>Day with Most Orders</p>
+                    <img src="../assets/sidebar_assets/orders-vector.svg" alt="Orders">
+                </div>
+                <hr>
+                <?php 
+                    $result = $mysqli->query("SELECT DATE_FORMAT(date, '%W') AS orderDay, COUNT(*) AS totalOrders FROM order_table GROUP BY orderDay ORDER BY totalOrders DESC LIMIT 1;");
+                    
+                    if ($result && $row = $result->fetch_assoc()) {
+                        list($orderDay, $totalOrders) = [$row['orderDay'], $row['totalOrders']];
+                        echo "<h1>$orderDay</h1>";
+                        echo "<h6>Total Orders: $totalOrders</h6>";
+                    } else {
+                        echo "<p>No data found or error: " . $mysqli->error . "</p>";
+                    }
+
+                    $result->free();
+                ?>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <p>Revenue Growth %</p>
+                    <img src="../assets/report_assets/bulb.svg" alt="Growth">
+                </div>
+                <hr>
+                <?php 
+                    $result = $mysqli->query("WITH MonthlyRevenue AS (SELECT DATE_FORMAT(date, '%Y-%m') AS month, SUM(total_price) AS total_revenue FROM order_table GROUP BY month)
+                    SELECT m1.month AS current_month, m1.total_revenue AS current_month_revenue, m2.month AS previous_month, m2.total_revenue AS previous_month_revenue, (m1.total_revenue - m2.total_revenue) / ABS(m2.total_revenue) * 100 AS revenue_growth_percentage FROM MonthlyRevenue m1 JOIN MonthlyRevenue m2 ON m1.month = DATE_FORMAT(CURDATE(), '%Y-%m') AND m2.month = DATE_FORMAT(CURDATE() - INTERVAL 1 MONTH, '%Y-%m');
+                    ");
+
+                    if ($result) {
+                        while ($row = $result->fetch_assoc()) {
+                            $currentMonth = $row['current_month'];
+                            $currentMonthRevenue = $row['current_month_revenue'];
+                            $previousMonth = $row['previous_month'];
+                            $previousMonthRevenue = $row['previous_month_revenue'];
+                            $revenueGrowthPercentage = $row['revenue_growth_percentage'];
+
+                            echo "<h1>$revenueGrowthPercentage%</h1>";
+                            echo "<p>Current Month: $currentMonthRevenue</p>";
+                            echo "<p>Previous Month: $previousMonthRevenue</p>";
+                        }
+                        $result->free();
+                    } else {
+                        echo "<p>No data found or error: " . $mysqli->error . "</p>";
+                    }
+                ?>
+            </div>            
         </div>
 
         <!-- Data for Profit Margin Gauge -->
@@ -88,20 +102,26 @@
             $profitMargin = 65; // Example value, replace it with your actual data
         ?>
 
-        <div class="SalesByDate">
-            <canvas id="SalesByDate"></canvas>
-        </div>
+        <div class="grid-container">
+            <div class="grid-item SalesByDate">
+                <h2>Sales by Date</h2>
+                <canvas id="SalesByDate"></canvas>
+            </div>
 
-        <div class="SalesByCategory">
-            <canvas id="SalesByCategory"></canvas>
-        </div>
+            <div class="grid-item SalesByCategory">
+                <h2>Sales by Category</h2>
+                <canvas id="SalesByCategory"></canvas>
+            </div>
 
-        <div class="Top10ProductsByQuantity">
-            <canvas id="Top10ProductsByQuantity"></canvas>
-        </div>
+            <div class="grid-item Top10ProductsByQuantity">
+                <h2>Top 10 Products By Quantity</h2>
+                <canvas id="Top10ProductsByQuantity"></canvas>
+            </div>
 
-        <div class="Top10ProductsBySales">
-            <canvas id="Top10ProductsBySales"></canvas>
+            <div class="grid-item Top10ProductsBySales">
+                <h2>Top 10 Products By Sales</h2>
+                <canvas id="Top10ProductsBySales"></canvas>
+            </div>
         </div>
     </div>
 
@@ -178,6 +198,25 @@
     ?>
 
     <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Find the maximum height among all cards
+            const cards = document.querySelectorAll(".card");
+            let maxHeight = 0;
+
+            cards.forEach((card) => {
+                const cardHeight = card.offsetHeight;
+                if (cardHeight > maxHeight) {
+                    maxHeight = cardHeight;
+                }
+            });
+
+            // Set the maximum height for all cards
+            cards.forEach((card) => {
+                card.style.height = `${maxHeight}px`;
+            });
+        });
+
         // line chart for Sales by Date
         const ctx = document.getElementById('SalesByDate');
         const dates = <?php echo json_encode($dates); ?>;

@@ -10,6 +10,8 @@ body {
   padding: 20px;
 
   background-color: #eff3fd;
+
+  overflow-y: auto;
 }
 
 .header {
@@ -25,10 +27,6 @@ body {
   height: 50px;
 }
 
-.main-content {
-  overflow-y: auto;
-}
-
 .table-section {
   background-color: #ffffff;
   padding: 20px;
@@ -36,20 +34,26 @@ body {
   border-radius: 20px;
 }
 
-#product_table_wrapper {
+#staff_table_wrapper {
   border: none;
 }
 
-#product_table th {
+#staff_table th {
   border: none;
   background-color: #f7f8fa !important;
 }
 
-#product_table td {
+#staff_table td {
   border: none;
 }
 
 button {
   background-color: #5f66e9 !important;
   color: white !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.5rem 0.75rem;
+  margin-left: 2px;
+  font-size: 14px;
 }

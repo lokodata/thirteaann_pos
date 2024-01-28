@@ -6,10 +6,58 @@ body {
   padding: 0;
 }
 
-.SalesByDate,
-.SalesByCategory,
-.Top10ProductsByQuantity,
-.Top10ProductsBySales {
-  width: 500px;
-  height: 500px;
+.main-content {
+  padding: 20px;
+
+  background-color: #eff3fd;
+
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.card {
+  width: 30%;
+  border-radius: 20px;
+  border: none !important;
+
+  padding: 20px;
+}
+
+.card hr {
+  border: 2px solid #00dea3;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card h1,
+.card p {
+  margin-bottom: 0px !important;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.grid-item {
+  width: 100%;
+
+  background-color: white;
+
+  text-align: center;
+  padding: 20px;
+
+  border-radius: 20px;
 }

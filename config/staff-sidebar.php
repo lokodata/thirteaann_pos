@@ -95,12 +95,6 @@
                 </a>
             </li>
             <li>
-                <a href="hrm.php">
-                    <img class="link-img" src="../assets/sidebar_assets/hrm-vector.svg" alt="staff">
-                    HRM
-                </a>
-            </li>
-            <li>
                 <a href="inventory.php">
                     <img class="link-img" src="../assets/sidebar_assets/inventory-vector.svg" alt="inventory">
                     Inventory
@@ -116,12 +110,6 @@
                 <a href="order-records.php">
                     <img class="link-img" src="../assets/sidebar_assets/records-vector.svg" alt="history">
                     Records
-                </a>
-            </li>
-            <li>
-                <a href="report.php">
-                    <img class="link-img" src="../assets/sidebar_assets/report-vector.svg" alt="report">
-                    Report
                 </a>
             </li>
         </ol>

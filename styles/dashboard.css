@@ -6,5 +6,71 @@ body {
   height: 100vh;
 }
 
+.title {
+  margin-bottom: 30px;
+}
+
+.card {
+  width: 30%;
+  border-radius: 20px;
+  border: none;
+
+  padding: 20px;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+hr {
+  border: 2px solid #00dea3;
+}
+
+.card-title h1,
+.card-title p {
+  margin-bottom: 0px !important;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
 .main-content {
+  padding: 20px;
+
+  background-color: #eff3fd;
+
+  overflow-y: auto;
+}
+
+.table-section {
+  background-color: #ffffff;
+  padding: 20px;
+
+  border-radius: 20px;
+}
+
+#recent_orders_wrapper {
+  border: none;
+}
+
+#recent_orders th {
+  border: none;
+  background-color: #f7f8fa !important;
+}
+
+#recent_orders td {
+  border: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.5rem 0.75rem;
+  margin-left: 2px;
+  font-size: 14px;
 }

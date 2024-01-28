@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="../styles/orders.css">
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
 <body>
     <!-- Receipt Modal -->
@@ -40,10 +43,8 @@
 
     <?php require "../config/admin-sidebar.php"; ?>
     
-    <div class="container">
+    <div class="main-content">
         <div class="inventory">
-            <h1>Products</h1>
-
             <div class="categories">
                 <?php
                     require '../config/config.php';
@@ -54,11 +55,11 @@
                     $categoryStmt->bind_result($distinctCategory);
 
                     // Generate a button for 'All' category
-                    echo "<button class='btn btn-info mx-2 my-2 category-btn' onclick='filterByCategory(\"All\")'>All</button>";
+                    echo "<button class='btn mx-2 my-2 category-btn' onclick='filterByCategory(\"All\")'>All</button>";
 
                     // Generate a button for each distinct category
                     while ($categoryStmt->fetch()) {
-                        echo "<button class='btn btn-info mx-2 my-2 category-btn' onclick='filterByCategory(\"$distinctCategory\")'>$distinctCategory</button>";
+                        echo "<button class='btn mx-2 my-2 category-btn' onclick='filterByCategory(\"$distinctCategory\")'>$distinctCategory</button>";
                     }
 
                     // Close the statement
@@ -71,6 +72,7 @@
                     <tr>
                         <th>Product Image</th>
                         <th>Product Name</th>
+                        <th>Size</th>
                         <th>Price</th>
                     </tr>
                 </thead>
@@ -79,7 +81,7 @@
                         require '../config/config.php';
 
                         // Fetch products with the initial condition (e.g., size)
-                        $stmt = $mysqli->prepare("SELECT * FROM product_table WHERE size IN ('500 ml', 'Regular')");
+                        $stmt = $mysqli->prepare("SELECT * FROM product_table ORDER by product_name ASC");
                         $stmt->execute();
                         $stmt->bind_result($product_id, $product_image, $product_name, $size, $unit_price, $category);
 
@@ -87,6 +89,7 @@
                             echo "<tr data-product-id='$product_id' data-category='$category'>";
                                 echo "<td><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
                                 echo "<td>$product_name</td>";
+                                echo "<td>$size</td>";
                                 echo "<td>$unit_price</td>";
                             echo "</tr>";
                         }
@@ -98,8 +101,6 @@
         </div>
         
         <div class="order" id="order_details">
-            <h1>Order</h1>
-
             <div id="errorMessageSave" class="alert alert-warning d-none"></div>
 
             <form id="order_form">
@@ -110,7 +111,6 @@
                             <th>Size</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,11 +151,11 @@
                         </tr>
 
                         <tr>
-                            <td>
-                                <button type="button" class="btn btn-primary" id='saveOrderBtn'>
+                            <td class="action">
+                                <button type="button" class="btn" id='saveOrderBtn'>
                                     Save Order
                                 </button>
-                                <button type="button" class="btn btn-danger" id='clearOrderBtn'>
+                                <button type="button" class="btn" id='clearOrderBtn'>
                                     Clear
                                 </button>
                             </td>
@@ -166,11 +166,36 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
+        function initializeDataTable() {
+            $('#product_table').DataTable({
+                paging: true,
+                pageLength: 15,
+                lengthChange: false,
+            });
+        }
+
+        $(document).ready(function () {
+            initializeDataTable();
+        });
+
+        function filterByCategory(selectedCategory) {
+            var table = $('#product_table').DataTable();
+
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                var rowCategory = $(table.row(dataIndex).node()).data('category');
+                return (selectedCategory === 'All' || rowCategory === selectedCategory);
+            });
+
+            table.draw();
+
+            // Remove the filter immediately after drawing the table
+            $.fn.dataTable.ext.search.pop();
+        }
+
 
         // Function to clear the order and reset form values
         function clearOrder() {
@@ -194,68 +219,34 @@
             clearOrder();
         });
 
-
-        function printModalBody() {
-            try {
-                // Show the modal content
-                const modalBody = document.getElementById('modalBodyContent');
-                modalBody.style.display = 'block';
-
-                // Print the modal content
-                window.print();
-
-            } catch (error) {
-                alertify.set('notifier','position', 'top-right');
-                alertify.error("Error during printModalBody: " + error);
-            }
-        }
-
-        function filterByCategory(selectedCategory) {
-            var rows = $('#product_table tbody tr');
-            
-            rows.each(function() {
-                var category = $(this).data('category');
-                
-                // Toggle the visibility based on the selected category
-                if (selectedCategory === 'All' || category === selectedCategory) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        }
-
         var selectedProducts = [];
 
-        $(document).ready(function() {
-            // Handle click event on product rows
-            $('#product_table tbody tr').click(function() {
-                var productId = $(this).data('product-id');
+        $(document).on('click', '#product_table tbody tr', function() {
+            var productId = $(this).data('product-id');
 
-                // Check if the product is already in the order table
-                var existingRow = $('#order_table tbody tr[data-product-id="' + productId + '"]');
-                if (existingRow.length > 0) {
-                    // If the product already exists, trigger incrementQuantity
-                    incrementQuantity(existingRow.find('.increment-btn'));
-                } else {
-                    // If the product is not in the table yet, use AJAX to fetch product details
-                    $.ajax({
-                        url: '../config/orders-function.php',
-                        method: 'POST',
-                        data: { productId: productId },
-                        success: function(response) {
-                            // Append the new row for the selected product
-                            $('#order_table tbody').append(response);
-                            
-                            updateTotalPrice(); // Trigger updateTotalPrice after appending the row
-                            updateExactChange();
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
-                }
-            });
+            // Check if the product is already in the order table
+            var existingRow = $('#order_table tbody tr[data-product-id="' + productId + '"]');
+            if (existingRow.length > 0) {
+                // If the product already exists, trigger incrementQuantity
+                incrementQuantity(existingRow.find('.increment-btn'));
+            } else {
+                // If the product is not in the table yet, use AJAX to fetch product details
+                $.ajax({
+                    url: '../config/orders-function.php',
+                    method: 'POST',
+                    data: { productId: productId },
+                    success: function(response) {
+                        // Append the new row for the selected product
+                        $('#order_table tbody').append(response);
+                        
+                        updateTotalPrice(); // Trigger updateTotalPrice after appending the row
+                        updateExactChange();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
         });
 
 
@@ -420,7 +411,7 @@
             $('#total_price').text(total.toFixed(2));
         }
 
-        // Modify the updatePrices function to trigger the total price update
+        // Modify the updatePrices function to handle price ranges
         function updatePrices(element) {
             var row = $(element).closest('tr');
             var selectedSize = row.find('select[name="size"]').val();
@@ -431,8 +422,9 @@
                 method: 'POST',
                 data: { size: selectedSize, product_name: row.find('td:first').text(), quantity: quantity },
                 success: function(response) {
-                    row.find('#priceText').text(response);
-                    
+                    var priceText = parsePriceRange(response); // Parse the price range
+                    row.find('#priceText').text(priceText);
+
                     // Trigger the update of total price after updating individual product price
                     updateTotalPrice();
                     updateExactChange();
@@ -441,6 +433,16 @@
                     console.log(error);
                 }
             });
+        }
+
+        // Function to parse price range and return the average price
+        function parsePriceRange(priceRange) {
+            var prices = priceRange.split('-');
+            var averagePrice = prices.reduce(function (sum, price) {
+                return sum + parseFloat(price.trim());
+            }, 0) / prices.length;
+
+            return averagePrice.toFixed(2);
         }
 
     </script>

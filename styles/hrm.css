@@ -5,3 +5,50 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+.main-content {
+  padding: 20px;
+
+  background-color: #eff3fd;
+
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.table-section {
+  background-color: #ffffff;
+  padding: 20px;
+
+  border-radius: 20px;
+}
+
+#staff_table_wrapper {
+  border: none;
+}
+
+#staff_table th {
+  border: none;
+  background-color: #f7f8fa !important;
+}
+
+#staff_table td {
+  border: none;
+}
+
+button {
+  background-color: #5f66e9 !important;
+  color: white !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.5rem 0.75rem;
+  margin-left: 2px;
+  font-size: 14px;
+}

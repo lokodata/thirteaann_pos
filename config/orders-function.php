@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['productId'])) {
     echo "<input type='tel' pattern='[0-9]*' inputmode='numeric' name='quantity' value='1' min='1' onchange='updatePrices(this)'>";
     echo "</td>";
 
-    echo "<td>";
-    echo "<button type='button' class='btn btn-sm btn-success increment-btn' onclick='incrementQuantity(this)'>+</button>";
-    echo "<button type='button' class='btn btn-sm btn-danger' onclick='decrementQuantity(this)'>-</button>";
-    echo "<button type='button' class='btn btn-sm btn-warning' onclick='removeItem(this)'>Remove</button>";
+    echo "<td class='order_action'>";
+    echo "<button type='button' class='btn btn-sm increment-btn' onclick='incrementQuantity(this)'>+</button>";
+    echo "<button type='button' class='btn btn-sm' onclick='decrementQuantity(this)'>-</button>";
+    echo "<button type='button' class='btn btn-sm' onclick='removeItem(this)'>Remove</button>";
     echo "</td>";
     echo "</tr>";
 } else {
