@@ -123,10 +123,6 @@ th {
   border: none;
 }
 
-tr {
-  border: none;
-}
-
 td:last-child {
   display: flex !important;
   align-items: center !important;
@@ -135,9 +131,11 @@ td:last-child {
 
 caption,
 th,
-td {
+td,
+tr,
+thead {
   padding: 1rem !important;
-  border: none;
+  border: none !important;
 }
 
 caption,
