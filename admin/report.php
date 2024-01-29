@@ -10,10 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThirTeaAnn</title>
 
-    <link rel="stylesheet" href="../styles/report.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/dashboard.css">
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/report.css">
     <link rel="stylesheet" href="../styles/admin-sidebar.css">
 
     <?php include('../config/config.php'); ?>
@@ -28,7 +28,7 @@
         
         <p>Visualizing your business data to aid in your business decisions.</p>
 
-        <div class="header">
+        <div class="main-header">
             <div class="card">
                 <div class="card-title">
                     <p>Revenue Leader</p>
