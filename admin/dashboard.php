@@ -27,11 +27,11 @@
     <div class="main-content">
         <h1 class="title">Dashboard</h1>
 
-        <div class="header-admin flex">
+        <div class="card-container">
             <div class="card">
                 <div class="card-title">
                     <p>Most Popular</p>
-                    <img src="../assets/dashboard_assets/trophy.svg" alt="Trophy">
+                    <i class='bx bx-trophy nav__icon'></i>
                 </div>
                 <hr>
 
@@ -53,7 +53,7 @@
             <div class="card">
                 <div class="card-title">
                     <p>Orders</p>
-                    <img src="../assets/dashboard_assets/orders.svg" alt="Orders">
+                    <i class='bx bx-wallet nav__icon'></i>
                 </div>
                 <hr>
 
@@ -75,7 +75,7 @@
             <div class="card">
                 <div class="card-title">
                     <p>Sales</p>
-                    <img src="../assets/dashboard_assets/trophy.svg" alt="Trophy">
+                    <i class='bx bx-money-withdraw nav__icon' ></i>
                 </div>
                 <hr>
 
@@ -96,7 +96,7 @@
 
         </div>
 
-        <div class="table-section">
+        <div class="wrapper">
             <table class="table" id="recent_orders">
                 <thead>
                     <tr>
@@ -147,16 +147,16 @@
                         // Echo the results into the table using a different while loop
                         foreach ($orderResults as $order) {
                             echo "<tr>";
-                            echo "<td>{$order['order_id']}</td>";
-                            echo "<td>{$order['date']}</td>";
-                            echo "<td>";
+                            echo "<td data-cell='Order ID'>{$order['order_id']}</td>";
+                            echo "<td data-cell='Date'>{$order['date']}</td>";
+                            echo "<td data-cell='Product'>";
                             foreach ($orderItems as $orderItem) {
                                 if ($orderItem['order_id'] == $order['order_id']) {
                                     echo "{$orderItem['product_name']} <br>";
                                 }
                             }
                             echo "</td>";
-                            echo "<td>{$order['total_price']}</td>";
+                            echo "<td data-cell='Price'>{$order['total_price']}</td>";
                             echo "</tr>";
                         }
                     ?>

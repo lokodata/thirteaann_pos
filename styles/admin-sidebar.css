@@ -115,7 +115,7 @@ img {
 
 .header__input::placeholder {
   font-family: var(--body-font);
-  color: var(--text-color);
+  /* color: var(--text-color); */
 }
 
 .header__icon,
@@ -275,7 +275,7 @@ img {
   }
 
   .header {
-    display: none;
+    display: none !important;
     padding: 0 3rem 0 6rem;
   }
 
@@ -348,4 +348,111 @@ img {
   .nav:hover .nav__dropdown-icon {
     opacity: 1;
   }
+}
+
+input[type="search"] {
+  /* Your styles for the search input */
+  margin: 1rem !important;
+  width: 200px;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  /* Remove the default input outline */
+}
+
+input[type="search"]:focus {
+  /* Styles for the search input when focused */
+  border-color: #007bff;
+  /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  /* Add a subtle box shadow on focus */
+}
+
+
+/* Table Responsive */
+.wrapper {
+  width: min(2000px, 100% - 0rem) !important;
+  margin-inline: auto !important;
+}
+
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  background: #323232 !important;
+}
+
+th {
+  background-color: var(--first-color) !important;
+}
+
+caption,
+th,
+td {
+  padding: 1rem !important;
+}
+
+caption,
+th {
+  text-align: left !important;
+}
+
+caption {
+  background-color: hsl(0, 0%, 0%);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+th {
+  background: hsl(0 0% 0% / 0.5);
+}
+
+tr:nth-of-type(2n) {
+  background: hsl(0 0% 0% / 0.1);
+}
+
+@media (max-width: 760px) {
+  th {
+    display: none;
+  }
+
+  td {
+    display: grid !important;
+    grid-template-columns: 15ch auto !important;
+    gap: 0.5rem !important;
+    padding: .5rem 1rem !important;
+  }
+
+  td:first-child {
+    padding-top: 2rem !important;
+  }
+
+  td:last-child {
+    padding-bottom: 2rem !important;
+  }
+
+  td:before {
+    content: attr(data-cell) ": " !important;
+    font-weight: 700 !important;
+    text-transform: capitalize !important;
+  }
+}
+
+
+/* Pagination */
+
+.paginate_button {
+  background-color: transparent !important;
+  color: #111 !important;
+  border-radius: 5px !important;
+  border: none !important;
+  border: 1px solid #ddd !important;
+}
+
+a.paginate_button.current {
+  background-color: var(--first-color) !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+  border: none !important;
 }

@@ -50,32 +50,32 @@
                                 <span class="nav__name">Dashboard</span>
                             </a>
 
-                            <a href="dashboard.php" class="nav__link">
+                            <a href="hrm.php" class="nav__link">
                             <i class='bx bx-edit-alt nav__icon'></i>
                                 <span class="nav__name">HRM</span>
                             </a>
 
-                            <a href="dashboard.php" class="nav__link">
+                            <a href="inventory.php" class="nav__link">
                             <i class='bx bx-box nav__icon'></i>
                                 <span class="nav__name">Inventory</span>
                             </a>
                             
                             <div class="nav__dropdown">
-                                <a href="#" class="nav__link">
+                                <a href="orders.php" class="nav__link">
                                     <i class='bx bx-user nav__icon' ></i>
                                     <span class="nav__name">Orders</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                                </a>
+                                </a>    
 
                                 <div class="nav__dropdown-collapse">
                                     <div class="nav__dropdown-content">
-                                        <a href="#" class="nav__dropdown-item">Orders</a>
-                                        <a href="#" class="nav__dropdown-item">Orders Record</a>
+                                        <a href="orders.php" class="nav__dropdown-item">Orders</a>
+                                        <a href="order-records.php" class="nav__dropdown-item">Orders Record</a>
                                     </div>
                                 </div>
                             </div>
 
-                            <a href="#" class="nav__link">
+                            <a href="report.php" class="nav__link">
                             <i class='bx bxs-report nav__icon'></i>
                                 <span class="nav__name">Report</span>
                             </a>
