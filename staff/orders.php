@@ -127,26 +127,25 @@
 
                     <tfoot>
                         <tr>
-                            <td>Total:</td>
-                            <td id="total_price">0.00</td>
+                            <td data-cell='Total' id="total_price">0.00</td>
                         </tr>
 
                         <tr>
                             <td>Payment Received:</td>
-                            <td id="payment_received">
+                            <td data-cell='Amount'  id="payment_received">
                                 <input type='tel' pattern='[0-9]*' inputmode='numeric' placeholder="Enter amount" oninput="updateExactChange()">
                             </td>
                         </tr>
 
 
                         <tr>
-                            <td>Exact Change:</td>
-                            <td id="change">0.00</td>
+                            <td >Exact Change:</td>
+                            <td data-cell='Change'  id="change">0.00</td>
                         </tr>
 
                         <tr>
                             <td>Payment Method:</td>
-                            <td id="payment_method">
+                            <td data-cell='Payment'  id="payment_method">
                                 <label>
                                     <input type="radio" name="payment_method" value="Cash"> Cash
                                 </label>
@@ -157,7 +156,7 @@
                         </tr>
 
                         <tr>
-                            <td class="action">
+                            <td data-cell='Action'  class="action">
                                 <button type="button" class="btn" id='saveOrderBtn'>
                                     Save Order
                                 </button>

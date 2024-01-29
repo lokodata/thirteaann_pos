@@ -1,138 +1,80 @@
-<!-- Code that generates the sidebar navigator for staff -->
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-    body {
-        display: flex;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
-    .main-content {
-        flex-grow: 1;
-    }
-
-    .sidebar-wrapper {
-        height: 100%;
-        flex-basis: 10%;
-        color: #00140E;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        padding: 30px 15px;
-    }
-
-    .sidebar-wrapper ol {
-        list-style: none;
-        padding: 0;
-    }
-
-    .logo-container {
-        display: flex;
-        flex-direction: column;
-
-        margin-bottom: 50px;
-    }
-
-    .logo-container h1 {
-        font-size: 18px;
-        font-weight: 700;
-    }
-
-    .logo {
-        width: 120px;
-        height: 120px;
-
-        border-radius: 50%;
-    }
-
-    .link-img {
-        width: 24px;
-        height: 24px;
-        margin-right: 5px;
-    }
-
-    .sidebar ol {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    a {
-        text-decoration: none;
-        color: #00140E;
-        display: flex;
-        align-items: center;
+        <!--========== CSS ==========-->
         
-        margin-bottom: 16px;
+        <link rel="stylesheet" href="../styles/staff-sidebar.css">
+        
 
-        font-size: 18px;
-    }
+        <title>Responsive sidebar submenus</title>
+    </head>
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="main-header d-flex justify-content-between w-100 p-3">
+                <i class='bx bx-wine nav__icon' class="header__img"></i>
+                <a href="#" class="header__logo">Thir Tea Ann</a>
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+            </div>
+        </header>
 
-    a:hover {
-        color: #00DEA3;
-        font-weight: 700;
-    }
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="#" class="nav__link nav__logo">
+                    <i class='bx bx-wine nav__icon'></i>
+                        <span class="nav__logo-name">Thir Tea Ann</span>
+                    </a>
+    
+                    <div class="nav__list">
+                        <div class="nav__items">
+                            <!-- <h3 class="nav__subtitle">Profile</h3> -->
+    
+                            <a href="dashboard.php" class="nav__link active">
+                                <i class='bx bxs-dashboard nav__icon'></i>
+                                <span class="nav__name">Dashboard</span>
+                            </a>
 
-    .active-link {
-        color: #00DEA3 !important;
-        font-weight: 700;
-    }
+                            <a href="inventory.php" class="nav__link">
+                            <i class='bx bx-box nav__icon'></i>
+                                <span class="nav__name">Inventory</span>
+                            </a>
+                            
+                            <div class="nav__dropdown">
+                                <a href="orders.php" class="nav__link">
+                                    <i class='bx bx-user nav__icon' ></i>
+                                    <span class="nav__name">Orders</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>    
 
-</style>
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="orders.php" class="nav__dropdown-item">Orders</a>
+                                        <a href="order-records.php" class="nav__dropdown-item">Orders Record</a>
+                                    </div>
+                                </div>
+                            </div>
 
-<div class="sidebar-wrapper">
-    <div class="upper">
-        <div class="logo-container">
-            <img class="logo" src="../assets/logo-2.svg" alt="ThirTeaAnn">
+                        </div>
+                    </div>
+                </div>
+
+                <a href="../config/logout.php" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon' ></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
         </div>
-
-        <ol>
-            <li>
-                <a class="dashboard" href="dashboard.php">
-                    <img class="link-img" src="../assets/sidebar_assets/dashboard-vector.svg" alt="menu">
-                    Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="inventory.php">
-                    <img class="link-img" src="../assets/sidebar_assets/inventory-vector.svg" alt="inventory">
-                    Inventory
-                </a>
-            </li>
-            <li>
-                <a href="orders.php">
-                    <img class="link-img" src="../assets/sidebar_assets/orders-vector.svg" alt="orders">
-                    Orders
-                </a>
-            </li>
-            <li>
-                <a href="order-records.php">
-                    <img class="link-img" src="../assets/sidebar_assets/records-vector.svg" alt="history">
-                    Records
-                </a>
-            </li>
-        </ol>
-    </div>
-
-    <a href="../config/logout.php">
-        <img class="link-img" src="../assets/sidebar_assets/logout-vector.svg"> 
-        Logout
-    </a>
-</div>
-
-<script>
-    // Get the current page URL
-    var currentPage = window.location.href;
-
-    // Add the 'active-link' class to the corresponding link
-    document.addEventListener('DOMContentLoaded', function () {
-        var links = document.querySelectorAll('.sidebar-wrapper a');
-        links.forEach(function (link) {
-            if (link.href === currentPage) {
-                link.classList.add('active-link');
-            }
-        });
-    });
-</script>
+        <!--========== MAIN JS ==========-->
+        <script src="../assets/js/sidebar.js"></script>
+    </body>
+</html>

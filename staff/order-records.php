@@ -43,7 +43,7 @@
     <!-- Sidebar Navigator -->
     <?php require "../config/staff-sidebar.php"; ?>
 
-    <div class="main-content">
+    <div class="main-content-staff">
         <h1>Order History</h1>
 
         <div class="table-section">

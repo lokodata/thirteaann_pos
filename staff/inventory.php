@@ -147,7 +147,7 @@
     <?php require "../config/staff-sidebar.php"; ?>
     
     <div class="main-content">
-        <div class="header">
+        <div class="header-inventory">
             <h1>Inventory Management</h1>
 
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#productAddModal">Add New Product</button>
@@ -155,6 +155,7 @@
 
         <div class="table-section">
             <table class="table" id="product_table">
+                <h1></h1>
                 <thead>
                     <tr>
                         <th></th>

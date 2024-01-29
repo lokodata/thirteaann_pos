@@ -1,6 +1,7 @@
 body {
   margin: 0;
   transition: all 0.5s ease-in-out;
+  overflow-x: hidden;
 
   width: 100vw;
   height: 100vh;
@@ -100,10 +101,17 @@ button p {
   margin-inline: auto !important;
 }
 
+
+#order_form .table tr td {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  background: #111 !important;
+}
+
 table {
   width: 100% !important;
   border-collapse: collapse !important;
-  background: #323232 !important;
+  background: #111 !important;
 }
 
 thead {
@@ -119,6 +127,12 @@ tr {
   border: none;
 }
 
+td:last-child {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem;
+}
+
 caption,
 th,
 td {
@@ -132,14 +146,14 @@ th {
 
 }
 
-tr:nth-child(even) td {
+/* tr:nth-child(even) td {
   background-color: #f7f8fa !important;
 }
 
 tr:nth-child(odd):hover td {
   background-color: #f7f8fa !important;
   cursor: pointer !important;
-}
+} */
 
 table.dataTable.no-footer {
   border-bottom: none !important;
