@@ -53,6 +53,11 @@ h1 {
   margin-bottom: 20px;
 }
 
+.card:hover {
+  cursor: pointer;
+  box-shadow: none;
+}
+
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .card {
