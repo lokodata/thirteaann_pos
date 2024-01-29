@@ -39,7 +39,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your website description goes here. Provide a brief and informative summary of your website.">
+    <meta name="description" content="Discover a world of delightful flavors and seamless service with our innovative milk tea Point of Sale (POS) system. Simplify order management, optimize inventory, and elevate customer experiences. Explore the perfect blend of efficiency and technology for your milk tea shop.">
     <meta name="author" content="lokodata, transcenddev, j4zrel">
     <title>ThirTeaAnn's POS</title>
 
