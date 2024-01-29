@@ -131,10 +131,10 @@
     <?php require "../config/admin-sidebar.php"; ?>
 
     <div class="main-content">
-        <div class="main-header d-flex justify-content-between m-4">
+        <div class="main-header d-flex justify-content-between align-items-center m-4">
             <h1>Staff Management</h1>
 
-            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staffAddModal">Add New Staff</button>
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staffAddModal">Add Staff</button>
         </div>
         
         <div class="table-section">

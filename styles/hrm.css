@@ -6,6 +6,10 @@ body {
   height: 100vh;
 }
 
+h1 {
+  font-size: 4vw;
+}
+
 .main-content {
   padding: 2rem 1rem !important;
 
@@ -105,7 +109,7 @@ table.dataTable.no-footer {
 
   td {
     display: grid !important;
-    grid-template-columns: 15ch auto !important;
+    grid-template-columns: 10ch auto !important;
     gap: 0.5rem !important;
     padding: .5rem 1rem !important;
   }
@@ -192,4 +196,19 @@ input[type="search"] {
 input[type="search"]:focus {
   border-color: #5f66e9 !important;
   box-shadow: 0 0 8px rgba(95, 102, 233, 0.5) !important;
+}
+
+
+@media (max-width: 760px) {
+  .table {
+    font-size: 0.8rem !important;
+  }
+
+  h1,
+  .btn {
+    font-size: 1rem;
+  }
+
+
+
 }
