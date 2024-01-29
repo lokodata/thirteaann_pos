@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/dashboard.css">
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/admin-sidebar.css">
     <?php include('../config/config.php'); ?>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
@@ -26,7 +27,7 @@
     <div class="main-content">
         <h1 class="title">Dashboard</h1>
 
-        <div class="header">
+        <div class="header-admin flex">
             <div class="card">
                 <div class="card-title">
                     <p>Most Popular</p>

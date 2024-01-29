@@ -1,21 +1,79 @@
+:root {
+  --color1: #eff3fd;
+}
+
+
 body {
   margin: 0;
   transition: all 0.5s ease-in-out;
-
   width: 100vw;
   height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.main-content {
+  margin-top: -3.5rem;
+}
+
+h1 {
+  color: #111;
 }
 
 .title {
   margin-bottom: 30px;
 }
 
-.card {
-  width: 30%;
-  border-radius: 20px;
-  border: none;
+/* Mobile-first styles */
+.header-admin {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  padding: 20px;
+.card {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  border: none;
+  /* Add a border for better visibility */
+
+  /* Additional styling for better visual appeal */
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: box-shadow 0.3s ease;
+
+  /* Padding and margin adjustments */
+  padding: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .card {
+    max-width: 100%;
+  }
+
+  .header-admin {
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  .card {
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .card {
+    max-width: 800px;
+  }
 }
 
 .card-title {
@@ -33,13 +91,6 @@ hr {
   margin-bottom: 0px !important;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 30px;
-}
 
 .main-content {
   padding: 20px;
