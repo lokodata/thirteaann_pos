@@ -349,23 +349,3 @@ img {
     opacity: 1;
   }
 }
-
-input[type="search"] {
-  /* Your styles for the search input */
-  margin: 1rem !important;
-  width: 200px;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  outline: none;
-  /* Remove the default input outline */
-}
-
-input[type="search"]:focus {
-  /* Styles for the search input when focused */
-  border-color: #5f66e9;
-  /* Change border color on focus */
-  box-shadow: 0 0 5px rgba(181, 103, 255, 0.5);
-  /* Add a subtle box shadow on focus */
-}
-

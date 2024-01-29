@@ -55,7 +55,12 @@ button {
 
 
 
-/*  */
+
+/* Table Responsive */
+.wrapper {
+  width: min(2000px, 100% - 0rem) !important;
+  margin-inline: auto !important;
+}
 
 table {
   width: 100% !important;
@@ -64,9 +69,8 @@ table {
 }
 
 th {
-  background-color: var(--first-color) !important;
+  /* background-color: hsla(0, 0%, 100%, 0.9) !important; */
 }
-
 
 caption,
 th,
@@ -79,22 +83,22 @@ th {
   text-align: left !important;
 }
 
-caption {
-  background-color: hsl(0, 0%, 0%);
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
+tr:nth-child(even) td {
+  background-color: #f7f8fa !important;
 }
 
-th {
-  background: hsl(0 0% 0% / 0.5);
+tr:nth-child(odd):hover td {
+  background-color: #f7f8fa !important;
+  cursor: pointer !important;
 }
 
-tr:nth-of-type(2n) {
-  background: hsl(0 0% 0% / 0.1);
+table.dataTable.no-footer {
+  border-bottom: none !important;
+  margin-bottom: 1rem !important;
 }
 
-@media (max-width: 1100px) {
+
+@media (max-width: 760px) {
   th {
     display: none;
   }
@@ -112,10 +116,6 @@ tr:nth-of-type(2n) {
 
   td:last-child {
     padding-bottom: 2rem !important;
-    /* background: red !important; */
-    width: 90% !important;
-    gap: 1em !important;
-    justify-content: start !important;
   }
 
   td:before {
@@ -123,4 +123,73 @@ tr:nth-of-type(2n) {
     font-weight: 700 !important;
     text-transform: capitalize !important;
   }
+}
+
+/* Pagination */
+
+/* Default styling for pagination button */
+.paginate_button {
+  background-color: transparent !important;
+  color: #111 !important;
+  border-radius: 5px !important;
+  border: 1px solid #ddd !important;
+  cursor: pointer !important;
+  /* Set cursor to pointer for non-disabled buttons */
+}
+
+/* Styling for active (current) page */
+.paginate_button.current {
+  background-color: #00dea3 !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+  border: none !important;
+}
+
+/* Styling for disabled button */
+.paginate_button.disabled {
+  background-color: #ddd !important;
+  color: #777 !important;
+  cursor: not-allowed !important;
+  /* Set cursor to not-allowed for disabled buttons */
+}
+
+/* Styling for next button */
+.paginate_button.next {
+  background-color: transparent !important;
+  color: #111 !important;
+  /* border-radius: 5px !important;
+  border: none !important; */
+}
+
+
+
+/* Search */
+
+.dataTables_wrapper label {
+  color: #5f66e9 !important;
+  font-weight: bold;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  margin: 1rem 0 !important;
+}
+
+input[type="search"] {
+  width: 200px !important;
+  background-color: #fff !important;
+  padding: 1rem !important;
+  border: none !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  transition: border-color 0.3s, box-shadow 0.3s !important;
+  font-size: 1rem !important;
+  color: #333 !important;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+input[type="search"]:focus {
+  border-color: #5f66e9 !important;
+  box-shadow: 0 0 8px rgba(95, 102, 233, 0.5) !important;
 }

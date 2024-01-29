@@ -8,6 +8,7 @@ body {
   transition: all 0.5s ease-in-out;
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .flex {
@@ -100,6 +101,12 @@ hr {
   overflow-y: auto;
 }
 
+.sales-overview {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
 .table-section {
   background-color: #ffffff;
   padding: 20px;
@@ -183,7 +190,6 @@ th {
   /* background-color: hsla(0, 0%, 100%, 0.9) !important; */
 }
 
-
 caption,
 th,
 td {
@@ -193,6 +199,20 @@ td {
 caption,
 th {
   text-align: left !important;
+}
+
+tr:nth-child(even) td {
+  background-color: #f7f8fa !important;
+}
+
+tr:nth-child(odd):hover td {
+  background-color: #f7f8fa !important;
+  cursor: pointer !important;
+}
+
+table.dataTable.no-footer {
+  border-bottom: none !important;
+  margin-bottom: 1rem !important;
 }
 
 
@@ -225,26 +245,69 @@ th {
 
 /* Pagination */
 
-.current {}
-
-.disabled {}
-
+/* Default styling for pagination button */
 .paginate_button {
   background-color: transparent !important;
   color: #111 !important;
   border-radius: 5px !important;
-  border: none !important;
   border: 1px solid #ddd !important;
+  cursor: pointer !important;
+  /* Set cursor to pointer for non-disabled buttons */
 }
 
-a.paginate_button {
-  background-color: var(--first-color) !important;
+/* Styling for active (current) page */
+.paginate_button.current {
+  background-color: #00dea3 !important;
   color: #fff !important;
   border-radius: 5px !important;
   border: none !important;
 }
 
-.paginate_button.next {}
+/* Styling for disabled button */
+.paginate_button.disabled {
+  background-color: #ddd !important;
+  color: #777 !important;
+  cursor: not-allowed !important;
+  /* Set cursor to not-allowed for disabled buttons */
+}
+
+/* Styling for next button */
+.paginate_button.next {
+  background-color: transparent !important;
+  color: #111 !important;
+  /* border-radius: 5px !important;
+  border: none !important; */
+}
 
 
-.card-container.previous {}
+
+/* Search */
+
+.dataTables_wrapper label {
+  color: #5f66e9 !important;
+  font-weight: bold;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  margin: 1rem 0 !important;
+}
+
+input[type="search"] {
+  width: 200px !important;
+  background-color: #fff !important;
+  padding: 1rem !important;
+  border: none !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  transition: border-color 0.3s, box-shadow 0.3s !important;
+  font-size: 1rem !important;
+  color: #333 !important;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+input[type="search"]:focus {
+  border-color: #5f66e9 !important;
+  box-shadow: 0 0 8px rgba(95, 102, 233, 0.5) !important;
+}
