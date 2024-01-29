@@ -12,11 +12,15 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-    <link rel="stylesheet" href="../styles/order-records.css">
+    
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/admin-sidebar.css">
+    <link rel="stylesheet" href="../styles/order-records.css">
 </head>
 <body>
     <!-- Receipt Modal -->
@@ -28,7 +32,9 @@
                     <p class="text-center">Timalan Balsahan<br> Naic, Cavite</p>
                     <p id="currentDate"></p>
                     <div id="order_information">
-                        <!-- Order information will be displayed here -->
+                        <p>THANK YOU FOR YOUR ORDER!</p>
+                        <p>We hope you enjoy your milk tea.</p>
+                        <p>Visit us again soon!</p>
                     </div>
                 </div>
 
@@ -110,21 +116,21 @@
                         // Echo the results into the table using a different while loop
                         foreach ($orderResults as $order) {
                             echo "<tr>";    
-                            echo "<td>{$order['order_id']}</td>";
-                            echo "<td>{$order['date']}</td>";
-                            echo "<td>";
+                            echo "<td data-cell='Order ID'>{$order['order_id']}</td>";
+                            echo "<td data-cell='Date'>{$order['date']}</td>";
+                            echo "<td data-cell='Product'>";
                             foreach ($orderItems as $orderItem) {
                                 if ($orderItem['order_id'] == $order['order_id']) {
                                     echo "{$orderItem['product_name']} ({$orderItem['size']}) - Quantity: {$orderItem['quantity']} - Total Price: {$orderItem['total_price']}<br>";
                                 }
                             }
                             echo "</td>";
-                            echo "<td>{$order['total_price']}</td>";
-                            echo "<td>{$order['payment_received']}</td>";
-                            echo "<td>{$order['exact_change']}</td>";
-                            echo "<td>{$order['payment_method']}</td>";
-                            echo "<td>{$order['receipt_id']}</td>";
-                            echo "<td>
+                            echo "<td data-cell='Total Price'>{$order['total_price']}</td>";
+                            echo "<td data-cell='Payment Received'>{$order['payment_received']}</td>";
+                            echo "<td data-cell='Exact Change'>{$order['exact_change']}</td>";
+                            echo "<td data-cell='Payment Method'>{$order['payment_method']}</td>";
+                            echo "<td data-cell='Receipt ID'>{$order['receipt_id']}</td>";
+                            echo "<td data-cell='Receipt'>
                                     <button class='btn'
                                             data-order-id='{$order['order_id']}'
                                             id='receiptBtn'>

@@ -5,6 +5,7 @@ body {
   width: 100vw;
   height: 100vh;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .main-content {
@@ -100,4 +101,17 @@ button {
 .wrapper {
   width: 100% !important;
   margin-inline: auto !important;
+}
+
+.categories,
+.table {
+  padding: 2rem;
+}
+
+form .table {
+  padding: 1rem !important;
+}
+
+.dataTables_info {
+  padding: 1rem;
 }

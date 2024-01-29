@@ -115,7 +115,6 @@ table.dataTable.no-footer {
   margin-bottom: 1rem !important;
 }
 
-
 @media (max-width: 760px) {
   th {
     display: none;
@@ -145,7 +144,6 @@ table.dataTable.no-footer {
 
 /* Pagination */
 
-/* Default styling for pagination button */
 .paginate_button {
   background-color: transparent !important;
   color: #111 !important;
@@ -178,8 +176,6 @@ table.dataTable.no-footer {
   /* border-radius: 5px !important;
   border: none !important; */
 }
-
-
 
 /* Search */
 
@@ -298,4 +294,8 @@ input[type="search"]:focus {
 
 #productEditModal input[type="file"]:focus::-webkit-file-upload-button {
   background-color: #5f66e9 !important;
+}
+
+btn .btn-close {
+  btn-close: red !important;
 }

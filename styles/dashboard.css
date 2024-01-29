@@ -176,7 +176,7 @@ hr {
 
 /* Table Responsive */
 .wrapper {
-  width: min(2000px, 100% - 0rem) !important;
+  width: min(2000px, 100% - 2rem) !important;
   margin-inline: auto !important;
 }
 
@@ -216,7 +216,7 @@ table.dataTable.no-footer {
 }
 
 
-@media (max-width: 760px) {
+@media (max-width: 1200px) {
   th {
     display: none;
   }
@@ -294,7 +294,8 @@ table.dataTable.no-footer {
 }
 
 input[type="search"] {
-  width: 200px !important;
+  width: 100% !important;
+  max-width: 200px !important;
   background-color: #fff !important;
   padding: 1rem !important;
   border: none !important;
