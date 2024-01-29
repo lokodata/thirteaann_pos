@@ -17,7 +17,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/admin-sidebar.css">
     <link rel="stylesheet" href="../styles/inventory.css">
+    <script defer src="../assets/js/table.js"></script>
 </head>
 <body>
     <!-- Add Product Modal -->
@@ -147,7 +150,7 @@
     <?php require "../config/admin-sidebar.php"; ?>
     
     <div class="main-content">
-        <div class="header">
+        <div class="main-header d-flex justify-content-between m-4">
             <h1>Inventory Management</h1>
 
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#productAddModal">Add New Product</button>
@@ -177,16 +180,16 @@
 
                         while ($stmt->fetch()) {
                             echo "<tr>";    
-                            echo "<td><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
+                            echo "<td data-cell='Product Image'><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
 
-                            echo "<td>$product_name</td>";
-                            echo "<td>$size</td>";
-                            echo "<td>$price</td>";
-                            echo "<td>$category</td>";
-                            echo "<td>
-                                    <button class='btn edit-btn' data-bs-toggle='modal' data-bs-target='#productEditModal' data-product-id='$product_id'> Edit </button>
+                            echo "<td data-cell='Product Name'>$product_name</td>";
+                            echo "<td data-cell='Size'>$size</td>";
+                            echo "<td data-cell='Price'>$price</td>";
+                            echo "<td data-cell='Category'>$category</td>";
+                            echo "<td data-cell='Action' class='d-flex justify-content-between g-3 w-50'>
+                                    <button class='btn edit-btn' data-bs-toggle='modal' data-bs-target='#productEditModal' data-product-id='$product_id'> <i class='bx bx-edit-alt'></i> </button>
 
-                                    <button class='btn delete-btn' data-product-id='$product_id'> Delete </button>
+                                    <button class='btn delete-btn' data-product-id='$product_id'><i class='bx bx-trash' > </i> </button>
                                 </td>";
                             echo "</tr>";
                         }

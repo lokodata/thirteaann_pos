@@ -4,6 +4,7 @@ body {
   width: 100vw;
   height: 100vh;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .main-content {
@@ -48,7 +49,7 @@ body {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 2rem;
 }
 
 .grid-item {

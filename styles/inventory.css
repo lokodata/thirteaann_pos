@@ -27,7 +27,7 @@ body {
   height: 50px;
 }
 
-.table-section {
+/* .table-section {
   background-color: #ffffff;
   padding: 20px;
 
@@ -45,7 +45,7 @@ body {
 
 #staff_table td {
   border: none;
-}
+} */
 
 button {
   background-color: #5f66e9 !important;
@@ -56,4 +56,23 @@ button {
   padding: 0.5rem 0.75rem;
   margin-left: 2px;
   font-size: 14px;
+}
+
+.product_image {
+  display: none;
+}
+
+thead th {
+  background-color: #fff !important;
+}
+
+
+tr,
+td,
+th {
+  border: none;
+}
+
+button.btn.edit-btn {
+  margin-right: 1em !important;
 }

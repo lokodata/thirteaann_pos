@@ -169,7 +169,7 @@
                             echo "<td data-cell='Action' class='d-flex justify-content-between g-3 w-50'>
                                     <button class='btn edit-btn' data-bs-toggle='modal' data-bs-target='#staffEditModal' data-user-id='$user_id'> <i class='bx bx-edit-alt'></i> </button>
 
-                                    <button class='btn delete-btn' data-user-id='$user_id'><i class='bx bx-trash' ></i></button>
+                                    <button class='btn delete-btn' data-user-id='$user_id'> <i class='bx bx-trash' > </i></button>
                                 </td>";
                             echo "</tr>";
                         }

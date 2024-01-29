@@ -32,7 +32,7 @@ body {
 .order {
   overflow-y: auto;
 
-  padding: 20px;
+  padding: 0;
   background-color: white;
   border-radius: 20px;
 }
@@ -95,4 +95,9 @@ button {
   #modalBodyContent * {
     visibility: visible;
   }
+}
+
+.wrapper {
+  width: 100% !important;
+  margin-inline: auto !important;
 }

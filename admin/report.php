@@ -12,6 +12,9 @@
 
     <link rel="stylesheet" href="../styles/report.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/admin-sidebar.css">
 
     <?php include('../config/config.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -237,7 +240,9 @@
                 datasets: [{
                     label: 'Sales by Date',
                     data: totalsales_date,
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(0, 222, 163, 0.2)', // Background color
+                    borderColor: 'rgba(0, 222, 163, 1)' // Border color
                 }]
             },
             options: {
@@ -264,7 +269,9 @@
                 datasets: [{
                     label: 'Sales by Category',
                     data: totalsales_category,
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(0, 222, 163, 0.2)', // Background color
+                    borderColor: 'rgba(0, 222, 163, 1)' // Border color
                 }]
             },
             options: {
@@ -292,7 +299,9 @@
                 datasets: [{
                     label: 'Top 10 Products By Quantity',
                     data: totalquantitysold,
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(0, 222, 163, 0.2)', // Background color
+                    borderColor: 'rgba(0, 222, 163, 1)' // Border color
                 }]
             },
             options: {
@@ -320,7 +329,9 @@
                 datasets: [{
                     label: 'Top 10 Products By Sales',
                     data: totalsales_product,
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(0, 222, 163, 0.2)', // Background color
+                    borderColor: 'rgba(0, 222, 163, 1)' // Border color
                 }]
             },
             options: {
