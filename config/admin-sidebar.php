@@ -9,14 +9,15 @@
 
         <!--========== CSS ==========-->
         <link rel="stylesheet" href="assets/css/admin-sidebar.css">
+        
 
         <title>Responsive sidebar submenus</title>
     </head>
     <body>
         <!--========== HEADER ==========-->
         <header class="header">
-            <div class="header__container">
-                <img src="assets/img/perfil.jpg" alt="" class="header__img">
+            <div class="main-header d-flex justify-content-between w-100 ">
+                <i class='bx bx-wine nav__icon' class="header__img"></i>
 
                 <a href="#" class="header__logo">Thir Tea Ann</a>
     
@@ -37,7 +38,7 @@
             <nav class="nav__container">
                 <div>
                     <a href="#" class="nav__link nav__logo">
-                    <i class='bx bxs-drink nav__icon'></i>
+                    <i class='bx bx-wine nav__icon'></i>
                         <span class="nav__logo-name">Thir Tea Ann</span>
                     </a>
     

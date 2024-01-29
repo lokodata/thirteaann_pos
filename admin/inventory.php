@@ -89,7 +89,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Product</h1>
-                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <form id="updateProduct" action="">
@@ -150,14 +150,17 @@
     <?php require "../config/admin-sidebar.php"; ?>
     
     <div class="main-content">
-        <div class="main-header d-flex justify-content-between m-4">
+        <div class="header-inventory">  
             <h1>Inventory Management</h1>
 
-            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#productAddModal">Add New Product</button>
+            <button type="button " class="btn d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#productAddModal">
+                <i class='bx bx-message-square-add nav__icon'></i>
+                <p>Add Product</p>
+            </button>
         </div>
 
         <div class="table-section">
-            <table class="table" id="product_table">
+            <table class="table wrapper" id="product_table">
                 <thead>
                     <tr>
                         <th></th>

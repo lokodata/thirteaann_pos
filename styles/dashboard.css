@@ -16,7 +16,7 @@ body {
 }
 
 .main-content {
-  margin-top: -3.5rem;
+  /* margin-top: 1rem; */
 }
 
 h1 {
@@ -178,8 +178,6 @@ hr {
 }
 
 /* Table Responsive */
-
-/* Table Responsive */
 .wrapper {
   width: min(2000px, 100% - 2rem) !important;
   margin-inline: auto !important;
@@ -303,17 +301,23 @@ input[type="search"] {
   max-width: 200px !important;
   background-color: #fff !important;
   padding: 1rem !important;
-  border: none !important;
+  border: 2 px solid #5f66e9 !important;
   border-radius: 5px !important;
   outline: none !important;
   transition: border-color 0.3s, box-shadow 0.3s !important;
   font-size: 1rem !important;
   color: #333 !important;
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; */
 }
 
-input[type="search"]:focus {
+/* input[type="search"]:focus {
   border-color: #5f66e9 !important;
   box-shadow: 0 0 8px rgba(95, 102, 233, 0.5) !important;
+} */
+
+/* icon */
+
+.card-title i {
+  color: #5f66e9;
 }

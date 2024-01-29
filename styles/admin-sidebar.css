@@ -55,6 +55,17 @@ body {
   color: var(--text-color);
 }
 
+h1 {
+  font-size: 4vw;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    padding-top: 3rem;
+  }
+
+}
+
 h3 {
   margin: 0;
 }

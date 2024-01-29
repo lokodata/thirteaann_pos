@@ -98,7 +98,7 @@
 
                         while ($stmt->fetch()) {
                             echo "<tr data-product-id='$product_id' data-category='$category'>";
-                                echo "<td><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
+                                echo "<td data-cell=''><img class='product_image' src='data:image/png;base64, " . base64_encode($product_image) . "' alt='Product Image'></td>";
                                 echo "<td>$product_name</td>";
                                 echo "<td>$size</td>";
                                 echo "<td>$unit_price</td>";
@@ -133,25 +133,25 @@
                     <tfoot>
                         <tr>
                             <td>Total:</td>
-                            <td id="total_price">0.00</td>
+                            <td data-cell='Total Price' id="total_price">0.00</td>
                         </tr>
 
                         <tr>
                             <td>Payment Received:</td>
-                            <td id="payment_received">
-                                <input type='tel' pattern='[0-9]*' inputmode='numeric' placeholder="Enter amount" oninput="updateExactChange()">
+                            <td data-cell='Amount' id="payment_received">
+                                <input type='tel' pattern='[0-9]*' inputmode='numeric' placeholder="123" oninput="updateExactChange()">
                             </td>
                         </tr>
 
 
                         <tr>
                             <td>Exact Change:</td>
-                            <td id="change">0.00</td>
+                            <td data-cell='Change' id="change">0.00</td>
                         </tr>
 
                         <tr>
                             <td>Payment Method:</td>
-                            <td id="payment_method">
+                            <td data-cell='Payment' id="payment_method" class="payment_method">
                                 <label>
                                     <input type="radio" name="payment_method" value="Cash"> Cash
                                 </label>
@@ -162,7 +162,7 @@
                         </tr>
 
                         <tr>
-                            <td class="action">
+                            <td class="action" data-cell='Amount'>
                                 <button type="button" class="btn" id='saveOrderBtn'>
                                     Save Order
                                 </button>
