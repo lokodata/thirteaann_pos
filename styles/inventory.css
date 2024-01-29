@@ -59,16 +59,26 @@ h1 {
   border: none;
 } */
 
-button {
+/* button {
   background-color: #5f66e9 !important;
   color: white !important;
   padding: 1rem !important;
 
+} */
+
+button p {
+  margin: 0 !important;
 }
+
+
 
 @media screen and (max-width: 768px) {
   button {
     font-size: 0.9rem !important;
+  }
+
+  button p {
+    display: none !important;
   }
 
 }

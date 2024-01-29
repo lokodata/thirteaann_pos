@@ -16,7 +16,7 @@
     <body>
         <!--========== HEADER ==========-->
         <header class="header">
-            <div class="main-header d-flex justify-content-between w-100 ">
+            <div class="main-header d-flex justify-content-between w-100 p-3">
                 <i class='bx bx-wine nav__icon' class="header__img"></i>
 
                 <a href="#" class="header__logo">Thir Tea Ann</a>

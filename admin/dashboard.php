@@ -34,7 +34,7 @@
                         <p>Most Popular</p>
                         <i class='bx bx-trophy nav__icon'></i>
                     </div>
-                    <!-- <hr> -->
+                    <hr>
 
                     <!-- Get Most Popular Product -->
                     <?php 
@@ -42,7 +42,7 @@
 
                         if ($result && $row = $result->fetch_assoc()) {
                             $productName = $row['product_name'];
-                            echo "<h1>$productName</h1>";
+                            echo "<h2>$productName</h2>";
                         } else {
                             echo "<p>No data found or error: " . $mysqli->error . "</p>";
                         }
@@ -56,7 +56,7 @@
                         <p>Orders</p>
                         <i class='bx bx-wallet nav__icon'></i>
                     </div>
-                    <!-- <hr> -->
+                    <hr>
 
                     <!-- Get Count of All Orders -->
                     <?php 
@@ -64,7 +64,7 @@
 
                         if ($result && $row = $result->fetch_assoc()) {
                             $totalOrders = $row['total_orders'];
-                            echo "<h1>$totalOrders</h1>";
+                            echo "<h2>$totalOrders</h2>";
                         } else {
                             echo "<p>No data found or error: " . $mysqli->error . "</p>";
                         }
@@ -78,7 +78,7 @@
                         <p>Sales</p>
                         <i class='bx bx-money-withdraw nav__icon' ></i>
                     </div>
-                    <!-- <hr> -->
+                    <hr>
 
                     <!-- Get Sum of All Total Prices -->
                     <?php 
@@ -86,7 +86,7 @@
 
                         if ($result && $row = $result->fetch_assoc()) {
                             $totalSales = $row['total_sales'];
-                            echo "<h1>$totalSales</h1>";
+                            echo "<h2>$totalSales</h2>";
                         } else {
                             echo "<p>No data found or error: " . $mysqli->error . "</p>";
                         }

@@ -15,12 +15,13 @@ body {
   overflow-y: auto;
 }
 
-.main-header {
+.card-group {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  margin-bottom: 30px;
+
+  margin-bottom: 1rem;
 }
 
 .card {
@@ -34,6 +35,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+hr {
+  border: 2px solid #00dea3;
 }
 
 .card h1,
@@ -58,13 +63,11 @@ body {
   border-radius: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
 
-  .main-header {
+  .card-group {
     flex-direction: column;
   }
-
-
 
   .grid-container {
     grid-template-columns: 1fr;

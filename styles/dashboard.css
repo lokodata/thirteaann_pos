@@ -37,6 +37,8 @@ h1 {
 }
 
 .card {
+  display: flex;
+  justify-content: space-evenly;
   width: 100%;
   max-width: 300px;
   height: 200px;
@@ -319,5 +321,5 @@ input[type="search"] {
 /* icon */
 
 .card-title i {
-  color: #5f66e9;
+  color: #00dea3;
 }

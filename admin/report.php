@@ -28,7 +28,7 @@
         
         <p>Visualizing your business data to aid in your business decisions.</p>
 
-        <div class="main-header">
+        <div class="card-group">
             <div class="card">
                 <div class="card-title">
                     <p>Revenue Leader</p>
@@ -42,7 +42,7 @@
                     
                     if ($result && $row = $result->fetch_assoc()) {
                         list($productId, $productName, $totalRevenue) = [$row['product_id'], $row['product_name'], $row['total_revenue']];
-                        echo "<h1>$productName</p>";
+                        echo "<h2>$productName<h2>";
                         echo "<h6>Total Revenue: $totalRevenue</p>";
                     } else {
                         echo "<p>No data found or error: " . $mysqli->error . "</p>";
@@ -65,7 +65,7 @@
                     
                     if ($result && $row = $result->fetch_assoc()) {
                         list($orderDay, $totalOrders) = [$row['orderDay'], $row['totalOrders']];
-                        echo "<h1>$orderDay</h1>";
+                        echo "<h2>$orderDay</h2>";
                         echo "<h6>Total Orders: $totalOrders</h6>";
                     } else {
                         echo "<p>No data found or error: " . $mysqli->error . "</p>";
@@ -96,7 +96,7 @@
                             $previousMonthRevenue = $row['previous_month_revenue'];
                             $revenueGrowthPercentage = $row['revenue_growth_percentage'];
 
-                            echo "<h1>$revenueGrowthPercentage%</h1>";
+                            echo "<h2>$revenueGrowthPercentage%</h2>";
                             echo "<p>Current Month: $currentMonthRevenue</p>";
                             echo "<p>Previous Month: $previousMonthRevenue</p>";
                         }
