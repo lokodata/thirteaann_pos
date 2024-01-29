@@ -161,15 +161,15 @@
 
                         while ($stmt->fetch()) {
                             echo "<tr>";
-                            echo "<td>$user_id</td>";
-                            echo "<td>$name</td>";
-                            echo "<td>$email</td>";
-                            echo "<td>$contact_number</td>";
-                            echo "<td>$role</td>";
-                            echo "<td>
-                                    <button class='btn edit-btn' data-bs-toggle='modal' data-bs-target='#staffEditModal' data-user-id='$user_id'> Edit </button>
+                            echo "<td data-cell='User ID'>$user_id</td>";
+                            echo "<td data-cell='Name'>$name</td>";
+                            echo "<td data-cell='Email'>$email</td>";
+                            echo "<td data-cell='Role'>$role</td>";
+                            echo "<td data-cell='contact Number'>$contact_number</td>";
+                            echo "<td data-cell='Action' class='d-flex justify-content-between g-3 w-50'>
+                                    <button class='btn edit-btn' data-bs-toggle='modal' data-bs-target='#staffEditModal' data-user-id='$user_id'> <i class='bx bx-edit-alt'></i> </button>
 
-                                    <button class='btn delete-btn' data-user-id='$user_id'> Delete </button>
+                                    <button class='btn delete-btn' data-user-id='$user_id'><i class='bx bx-trash' ></i></button>
                                 </td>";
                             echo "</tr>";
                         }

@@ -7,7 +7,7 @@ body {
 }
 
 .main-content {
-  padding: 20px;
+  padding: 2rem 1rem !important;
 
   background-color: #eff3fd;
 
@@ -51,4 +51,76 @@ button {
   padding: 0.5rem 0.75rem;
   margin-left: 2px;
   font-size: 14px;
+}
+
+
+
+/*  */
+
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  background: #323232 !important;
+}
+
+th {
+  background-color: var(--first-color) !important;
+}
+
+
+caption,
+th,
+td {
+  padding: 1rem !important;
+}
+
+caption,
+th {
+  text-align: left !important;
+}
+
+caption {
+  background-color: hsl(0, 0%, 0%);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+th {
+  background: hsl(0 0% 0% / 0.5);
+}
+
+tr:nth-of-type(2n) {
+  background: hsl(0 0% 0% / 0.1);
+}
+
+@media (max-width: 1100px) {
+  th {
+    display: none;
+  }
+
+  td {
+    display: grid !important;
+    grid-template-columns: 15ch auto !important;
+    gap: 0.5rem !important;
+    padding: .5rem 1rem !important;
+  }
+
+  td:first-child {
+    padding-top: 2rem !important;
+  }
+
+  td:last-child {
+    padding-bottom: 2rem !important;
+    /* background: red !important; */
+    width: 90% !important;
+    gap: 1em !important;
+    justify-content: start !important;
+  }
+
+  td:before {
+    content: attr(data-cell) ": " !important;
+    font-weight: 700 !important;
+    text-transform: capitalize !important;
+  }
 }
