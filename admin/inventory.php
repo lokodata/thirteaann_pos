@@ -249,7 +249,11 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        $('#product_table').load(location.href + " #product_table")
+                        // Destroy the DataTable instance
+                        $('#staff_table').DataTable().destroy();
+
+                        // Reload the page
+                        location.reload(true);
                     }
                 }
             });
@@ -323,7 +327,11 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        $('#product_table').load(location.href + " #product_table")
+                        // Destroy the DataTable instance
+                        $('#staff_table').DataTable().destroy();
+
+                        // Reload the page
+                        location.reload(true);
                     }
                 }
             });
@@ -354,7 +362,11 @@
                             alertify.set('notifier','position', 'bottom-right');
                             alertify.success(res.message);
 
-                            $('#product_table').load(location.href + " #product_table")
+                            // Destroy the DataTable instance
+                            $('#staff_table').DataTable().destroy();
+
+                            // Reload the page
+                            location.reload(true);
                         }
                     }
                 });

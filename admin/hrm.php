@@ -229,7 +229,11 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        $('#staff_table').load(location.href + " #staff_table")
+                        // Destroy the DataTable instance
+                        $('#staff_table').DataTable().destroy();
+
+                        // Reload the page
+                        location.reload(true);
                     }
                 }
             });
@@ -297,7 +301,11 @@
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(res.message);
 
-                        $('#staff_table').load(location.href + " #staff_table")
+                        // Destroy the DataTable instance
+                        $('#staff_table').DataTable().destroy();
+
+                        // Reload the page
+                        location.reload(true);
                     }
                 }
             });
@@ -328,7 +336,11 @@
                             alertify.set('notifier','position', 'bottom-right');
                             alertify.success(res.message);
 
-                            $('#staff_table').load(location.href + " #staff_table")
+                            // Destroy the DataTable instance
+                            $('#staff_table').DataTable().destroy();
+
+                            // Reload the page
+                            location.reload(true);
                         }
                     }
                 });
